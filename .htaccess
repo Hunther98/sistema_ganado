@@ -1,0 +1,17 @@
+# Proteger archivos de configuración
+<Files "config.*.php">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Proteger directorio de utilidades
+<Directory "utilidades">
+    Order allow,deny
+    Deny from all
+</Directory>
+
+# Permitir solo el acceso necesario
+<Files "api.php">
+    Order allow,deny
+    Allow from all
+</Files>

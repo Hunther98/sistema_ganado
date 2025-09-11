@@ -196,15 +196,15 @@ class dVenta {
         
         return $respuesta;
     }
-    function obtenerVentasPendientesPorUsuario($usuario_id) {
+    // agregado
+// Función para obtener ventas pendientes por usuario (como comprador o vendedor)
+    public function obtenerVentasPendientesPorUsuario($usuario_id) {
         $cone = new dConexion();
         $ventas = [];
         
         try {
             $con = $cone->Conectar();
-            $sql = "SELECT * FROM ventas 
-                    WHERE (comprador_id = ? OR vendedor_id = ?) 
-                    AND estado = 'pendiente'";
+            $sql = "SELECT * FROM ventas WHERE (comprador_id = ? OR vendedor_id = ?) AND estado = 'pendiente'";
             $stmt = mysqli_prepare($con, $sql);
             mysqli_stmt_bind_param($stmt, "ii", $usuario_id, $usuario_id);
             mysqli_stmt_execute($stmt);
@@ -222,7 +222,32 @@ class dVenta {
         
         return $ventas;
     }
-    
+
+    // Función para obtener todas las ventas
+    public function obtenerTodas() {
+        $cone = new dConexion();
+        $ventas = [];
+
+        try {
+            $con = $cone->Conectar();
+            $sql = "SELECT * FROM ventas";
+            $stmt = mysqli_prepare($con, $sql);
+            mysqli_stmt_execute($stmt);
+
+            $result = mysqli_stmt_get_result($stmt);
+            while ($row = mysqli_fetch_assoc($result)) {
+                $ventas[] = $row;
+            }
+
+            mysqli_stmt_close($stmt);
+            mysqli_close($con);
+        } catch (Exception $exc) {
+            echo "Error al obtener todas las ventas: " . $exc->getMessage();
+        }
+
+        return $ventas;
+    }
+
     // Getters y Setters
     public function getId() { return $this->id; }
     public function setId($id) { $this->id = $id; }

@@ -7,30 +7,6 @@ verificarAutenticacion();
 $nUsuario = new nUsuario();
 $usuario = $nUsuario->obtenerUsuario($_SESSION['usuario_id']);
 $mensaje = '';
-
-// Procesar actualización de perfil
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre = $_POST['nombre'] ?? '';
-    $apellido = $_POST['apellido'] ?? '';
-    $telefono = $_POST['telefono'] ?? '';
-    $direccion = $_POST['direccion'] ?? '';
-    
-    // Validaciones básicas
-    if (empty($nombre) || empty($apellido)) {
-        $mensaje = 'Nombre y apellido son obligatorios';
-    } else {
-        // En un sistema real, aquí se actualizaría el usuario en la base de datos
-        $_SESSION['usuario_nombre'] = $nombre . ' ' . $apellido;
-        $mensaje = 'Perfil actualizado correctamente';
-        
-        // Simular actualización
-        $usuario['nombre'] = $nombre;
-        $usuario['apellido'] = $apellido;
-        $usuario['telefono'] = $telefono;
-        $usuario['direccion'] = $direccion;
-    }
-}
-
 $titulo = 'Mi Perfil';
 ?>
 <?php include 'template/header.php'; ?>
@@ -138,9 +114,73 @@ $titulo = 'Mi Perfil';
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger">Eliminar Cuenta</button>
+                <a href="confirmar_eliminacion.php" class="btn btn-outline-danger">
+                    <i class="fas fa-trash"></i> Eliminar Cuenta
+                </a>
             </div>
         </div>
     </div>
 </div>
+<!-- Modal Eliminar Cuenta -->
+<div class="modal fade" id="modalEliminarCuenta" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmar Eliminación de Cuenta</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>Advertencia: Esta acción no se puede deshacer</strong>
+                </div>
+                
+                <p>Para confirmar que eres el propietario de esta cuenta, ingresa tu contraseña:</p>
+                
+                <form method="POST" action="procesar_eliminar_cuenta.php" id="formEliminarCuenta">
+                    <div class="mb-3">
+                        <label for="password_confirm" class="form-label">Contraseña *</label>
+                        <input type="password" class="form-control" id="password_confirm" name="password_confirm" required>
+                    </div>
+                    
+                    <div class="alert alert-warning">
+                        <h6><i class="fas fa-info-circle"></i> ¿Qué sucede cuando eliminas tu cuenta?</h6>
+                        <ul class="small">
+                            <li>Todos tus datos personales serán eliminados permanentemente</li>
+                            <li>Tu ganado registrado será eliminado (primero debes eliminarlo manualmente)</li>
+                            <li>Tus transacciones pendientes serán canceladas</li>
+                            <li>No podrás recuperar tu cuenta después de la eliminación</li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <a href="confirmar_eliminacion.php" class="btn btn-outline-danger">
+    <i class="fas fa-trash"></i> Eliminar Cuenta
+</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Validación adicional antes de enviar el formulario
+document.getElementById('formEliminarCuenta').addEventListener('submit', function(e) {
+    const password = document.getElementById('password_confirm').value;
+    
+    if (!password) {
+        e.preventDefault();
+        alert('Debes ingresar tu contraseña para confirmar la eliminación');
+        return false;
+    }
+    
+    if (!confirm('¿ESTÁS ABSOLUTAMENTE SEGURO? Esta acción no se puede deshacer y todos tus datos se perderán permanentemente.')) {
+        e.preventDefault();
+        return false;
+    }
+    
+    return true;
+});
+</script>
 <?php include 'template/footer.php'; ?>

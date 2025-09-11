@@ -107,12 +107,63 @@ class nUsuario {
             return array('exito' => false, 'mensaje' => 'Error al eliminar el usuario');
         }
     }
+  public function eliminarCuenta($usuario_id, $password_confirm) {
+    // Validaciones de negocio
+    if (empty($usuario_id)) {
+        return array('exito' => false, 'mensaje' => 'ID de usuario es requerido');
+    }
+    
+    if (empty($password_confirm)) {
+        return array('exito' => false, 'mensaje' => 'Debes confirmar tu contraseña para eliminar la cuenta');
+    }
+    
+    // Verificar que el usuario existe
+    $dUsuario = new dUsuario();
+    $usuario = $dUsuario->obtenerPorId($usuario_id);
+    
+    if (!$usuario) {
+        return array('exito' => false, 'mensaje' => 'Usuario no encontrado');
+    }
+    
+    // Verificar contraseña
+    $usuario_completo = $dUsuario->obtenerCompletoPorId($usuario_id);
+    if (!password_verify($password_confirm, $usuario_completo['password'])) {
+        return array('exito' => false, 'mensaje' => 'Contraseña incorrecta');
+    }
+    
+    // Verificar si el usuario tiene ganado registrado
+    require_once '../datos/dGanado.php';
+    $dGanado = new dGanado();
+    $ganado_usuario = $dGanado->obtenerPorUsuario($usuario_id);
+    
+    if (count($ganado_usuario) > 0) {
+        return array('exito' => false, 'mensaje' => 'No puedes eliminar tu cuenta porque tienes ganado registrado. Primero elimina o transfiere tus animales.');
+    }
+    
+    // Verificar si el usuario tiene ventas pendientes
+    require_once '../datos/dVenta.php';
+    $dVenta = new dVenta();
+    $ventas_pendientes = $dVenta->obtenerVentasPendientesPorUsuario($usuario_id);
+    
+    if (count($ventas_pendientes) > 0) {
+        return array('exito' => false, 'mensaje' => 'No puedes eliminar tu cuenta porque tienes ventas pendientes. Primero completa o cancela tus transacciones.');
+    }
+    
+    // Eliminar el usuario
+    $resultado = $dUsuario->eliminar($usuario_id);
+    
+    if ($resultado) {
+        return array('exito' => true, 'mensaje' => 'Cuenta eliminada exitosamente');
+    } else {
+        return array('exito' => false, 'mensaje' => 'Error al eliminar la cuenta');
+    }
+}
 
-    // Función para cerrar sesión
-    public function cerrarSesion() {
-        session_start();
-        session_unset();
-        session_destroy();
+// Función para cerrar sesión
+public function cerrarSesion() {
+    session_start();
+    session_unset();
+    session_destroy();
         return array('exito' => true, 'mensaje' => 'Sesión cerrada correctamente');
     }
     

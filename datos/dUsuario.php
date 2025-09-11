@@ -136,7 +136,7 @@ class dUsuario {
     }
     
     // Función para verificar si email existe
-    function emailExiste($email) {
+    function emailExiste($email, $exclude_id = null) {
         $cone = new dConexion();
         $existe = false;
         
@@ -190,7 +190,7 @@ class dUsuario {
         
         return $respuesta;
     }
-
+     //cambios
     // Función para eliminar usuario
     public function eliminar($id) {
     $cone = new dConexion();
@@ -211,6 +211,125 @@ class dUsuario {
         
         return $respuesta;
     }
+    // En datos/dUsuario.php, agregar estas funciones a la clase dUsuario
+
+public function obtenerCompletoPorId($id) {
+    $cone = new dConexion();
+    $usuario = null;
+    
+    try {
+        $con = $cone->Conectar();
+        $sql = "SELECT * FROM usuarios WHERE id = ?";
+        $stmt = mysqli_prepare($con, $sql);
+        mysqli_stmt_bind_param($stmt, "i", $id);
+        mysqli_stmt_execute($stmt);
+        
+        $result = mysqli_stmt_get_result($stmt);
+        if ($row = mysqli_fetch_assoc($result)) {
+            $usuario = $row;
+        }
+        
+        mysqli_stmt_close($stmt);
+        mysqli_close($con);
+    } catch (Exception $exc) {
+        echo "Error al obtener usuario completo: " . $exc->getMessage();
+    }
+    
+    return $usuario;
+}
+
+// La función eliminar ya debería existir, pero la mejoramos:
+public function eliminarCuenta($id) {
+    $cone = new dConexion();
+    $respuesta = false;
+    
+    try {
+        $con = $cone->Conectar();
+        
+        // Iniciar transacción para asegurar la integridad de los datos
+        mysqli_begin_transaction($con);
+        
+        // 1. Primero eliminamos registros relacionados en otras tablas
+        // (Estas funciones deben crearse en las respectivas clases)
+        
+        // Eliminar vacunaciones del ganado del usuario
+        $this->eliminarVacunacionesPorUsuario($con, $id);
+        
+        // Eliminar ganado del usuario
+        $this->eliminarGanadoPorUsuario($con, $id);
+        
+        // Eliminar ventas relacionadas con el usuario
+        $this->eliminarVentasPorUsuario($con, $id);
+        
+        // 2. Finalmente eliminamos el usuario
+        $sql = "DELETE FROM usuarios WHERE id = ?";
+        $stmt = mysqli_prepare($con, $sql);
+        mysqli_stmt_bind_param($stmt, "i", $id);
+        
+        $respuesta = mysqli_stmt_execute($stmt);
+        if ($respuesta) {
+            mysqli_commit($con);
+        } else {
+            mysqli_rollback($con);
+        }
+        
+        mysqli_stmt_close($stmt);
+        mysqli_close($con);
+    } catch (Exception $exc) {
+        if (isset($con)) {
+            mysqli_rollback($con);
+        }
+        echo "Error al eliminar usuario: " . $exc->getMessage();
+    }
+    
+    return $respuesta;
+}
+
+// Funciones auxiliares para eliminar datos relacionados
+private function eliminarVacunacionesPorUsuario($con, $usuario_id) {
+    // Primero obtenemos todos los IDs del ganado del usuario
+    $ganado_ids = [];
+    $sql = "SELECT id FROM ganado WHERE usuario_id = ?";
+    $stmt = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $usuario_id);
+    mysqli_stmt_execute($stmt);
+    
+    $result = mysqli_stmt_get_result($stmt);
+    while ($row = mysqli_fetch_assoc($result)) {
+        $ganado_ids[] = $row['id'];
+    }
+    mysqli_stmt_close($stmt);
+    
+    // Eliminamos las vacunaciones de cada animal
+    if (!empty($ganado_ids)) {
+        $placeholders = implode(',', array_fill(0, count($ganado_ids), '?'));
+        $sql = "DELETE FROM vacunaciones WHERE ganado_id IN ($placeholders)";
+        $stmt = mysqli_prepare($con, $sql);
+        
+        // Dinámicamente bindeamos los parámetros
+        $types = str_repeat('i', count($ganado_ids));
+        $stmt->bind_param($types, ...$ganado_ids);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    }
+}
+
+private function eliminarGanadoPorUsuario($con, $usuario_id) {
+    $sql = "DELETE FROM ganado WHERE usuario_id = ?";
+    $stmt = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $usuario_id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+}
+
+private function eliminarVentasPorUsuario($con, $usuario_id) {
+    // Eliminar ventas donde el usuario es comprador o vendedor
+    $sql = "DELETE FROM ventas WHERE comprador_id = ? OR vendedor_id = ?";
+    $stmt = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($stmt, "ii", $usuario_id, $usuario_id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+}
     
     // Getters y Setters
     public function getId() { return $this->id; }

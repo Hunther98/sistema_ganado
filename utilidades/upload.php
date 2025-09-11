@@ -2,9 +2,10 @@
 require_once '../config/config.php';
 
 function subirImagen($archivo) {
-    // Verificar si no hay error en la subida
-    if ($archivo['error'] !== UPLOAD_ERR_OK) {
-        return array('exito' => false, 'mensaje' => 'Error al subir el archivo');
+    // Verificar si es una imagen real
+    $check = getimagesize($archivo["tmp_name"]);
+    if($check === false) {
+        return array('exito' => false, 'mensaje' => 'El archivo no es una imagen válida');
     }
     
     // Verificar tamaño máximo

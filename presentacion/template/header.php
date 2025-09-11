@@ -1,12 +1,11 @@
 <?php
-// Verificar autenticación
 require_once '../config/config.php';
 
-// Si no está autenticado y no está en página de login/registro, redirigir
+// Verificar autenticación solo si no está en páginas públicas
 $pagina_actual = basename($_SERVER['PHP_SELF']);
-$paginas_permitidas = array('pLogin.php', 'pRegistro.php', 'index.php');
+$paginas_publicas = array('pLogin.php', 'pRegistro.php', 'index.php', 'catalogo.php');
 
-if (!isset($_SESSION['usuario_id']) && !in_array($pagina_actual, $paginas_permitidas)) {
+if (!isset($_SESSION['usuario_id']) && !in_array($pagina_actual, $paginas_publicas)) {
     header('Location: pLogin.php');
     exit;
 }
@@ -22,11 +21,15 @@ if (!isset($_SESSION['usuario_id']) && !in_array($pagina_actual, $paginas_permit
     <link rel="stylesheet" href="css/styles.css">
 
     <style>
+        main {
+            min-height: 75vh;
+            padding: 20px 0;
+        }
         .navbar-brand {
             font-weight: bold;
         }
         .hero-section {
-            background: linear-gradient(135deg, #0b871fff 0%, #73f55fff 100%);
+            
             color: white;
             padding: 80px 0;
             text-align: center;
@@ -272,6 +275,13 @@ h2 {
 /* Estilos para los iconos */
 .fas {
     margin-right: 5px;
+}
+h1{
+    background-color: linear-gradient(tp right, #0b871fff 0%, #73f55fff 100%);
+    background-clip: text;
+    color: transparent;
+    text-transform: uppercase;
+    font-weight: bold;
 }
     </style>
 </head>

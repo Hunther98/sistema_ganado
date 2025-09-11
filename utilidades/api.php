@@ -30,7 +30,7 @@ class ApiManager {
                 return false;
         }
     }
-    
+    /*
     public static function getGoogleMapsScript() {
         if (!self::isEnabled('google_maps') || empty(self::getApiKey('google_maps'))) {
             return '<!-- Google Maps deshabilitado -->';
@@ -38,7 +38,22 @@ class ApiManager {
         
         $apiKey = self::getApiKey('google_maps');
         return "<script async defer src=\"https://maps.googleapis.com/maps/api/js?key={$apiKey}&callback=initMaps&libraries=places\"></script>";
+    }*/
+    // Obtener el script de Google Maps si está habilitado y la API Key es válida
+    public static function getGoogleMapsScript() {
+    if (!self::isEnabled('google_maps')) {
+        error_log("Google Maps deshabilitado en configuración");
+        return '<!-- Google Maps deshabilitado por configuración -->';
     }
+    
+    $apiKey = self::getApiKey('google_maps');
+    if (empty($apiKey) || $apiKey === 'TU_API_KEY_REAL_AQUI') {
+        error_log("API Key de Google Maps no configurada correctamente");
+        return '<!-- Google Maps: API Key no configurada -->';
+    }
+    
+    return "<script async defer src=\"https://maps.googleapis.com/maps/api/js?key={$apiKey}&callback=initMaps&libraries=places\"></script>";
+}
 }
 
 // Inicializar el manager

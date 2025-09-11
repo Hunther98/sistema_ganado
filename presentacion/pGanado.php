@@ -227,7 +227,6 @@ $titulo = $accion == 'agregar' ? 'Publicar Ganado' : 'Editar Ganado';
             document.getElementById('latitud').value = event.latLng.lat();
             document.getElementById('longitud').value = event.latLng.lng();
         });
-        initMap();
     }
     
     // Geocodificación inversa para obtener coordenadas desde la dirección

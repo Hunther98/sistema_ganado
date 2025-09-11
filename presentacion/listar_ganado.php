@@ -68,6 +68,9 @@ $titulo = 'Mis Animales';
                                         <i class="fas fa-edit"></i> Editar
                                     </a>
                                 <?php endif; ?>
+                                <a href="pGanado.php?accion=eliminar&id=<?php echo $animal['id']; ?>" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Estás seguro de eliminar este animal?');">
+                                    <i class="fas fa-trash-alt"></i> Eliminar
+                                </a>
                             </div>
                         </div>
                         <div class="card-footer">

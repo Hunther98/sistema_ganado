@@ -1,6 +1,7 @@
 <?php
 require_once '../config/config.php';
 require_once '../negocio/nGanado.php';
+require_once '../utilidades/api.php'; // ← AÑADIR ESTA LÍNEA
 
 $nGanado = new nGanado();
 $filtros = [];
@@ -115,7 +116,8 @@ $razas = $nGanado->obtenerRazas();
                 <?php foreach ($ganado as $animal): ?>
                     <div class="col-md-6 col-lg-4 mb-4">
                         <div class="card h-100">
-                            <img src="../uploads<?php echo $animal['imagen']; ?>" class="card-img-top" alt="<?php echo $animal['nombre']; ?>">
+                            <img src="../uploads/<?php echo $animal['imagen']; ?>" class="card-img-top" ...>
+                            <!--<img src="../uploads<?php echo $animal['imagen']; ?>" class="card-img-top" alt="<?php echo $animal['nombre']; ?>">>-->
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $animal['nombre']; ?></h5>
                                 <h6 class="text-primary">$<?php echo number_format($animal['precio'], 2); ?></h6>
@@ -166,20 +168,33 @@ $razas = $nGanado->obtenerRazas();
                         </div>
                     </div>
                     
+                    <?php echo ApiManager::getGoogleMapsScript(); ?>
+    
                     <script>
-                        // Inicializar mapa para este animal
-                        function initMap<?php echo $animal['id']; ?>() {
-                            var location = {lat: <?php echo $animal['latitud']; ?>, lng: <?php echo $animal['longitud']; ?>};
-                            var map = new google.maps.Map(document.getElementById('map-<?php echo $animal['id']; ?>'), {
-                                zoom: 12,
-                                center: location,
-                                mapTypeId: google.maps.MapTypeId.HYBRID
-                            });
-                            var marker = new google.maps.Marker({
-                                position: location,
-                                map: map
-                            });
+                        // Inicializar todos los mapas
+                        function initMaps() {
+                            <?php foreach ($ganado as $animal): ?>
+                                initMap<?php echo $animal['id']; ?>();
+                            <?php endforeach; ?>
                         }
+                        
+                        // Función para inicializar mapa individual
+                        <?php foreach ($ganado as $animal): ?>
+                        function initMap<?php echo $animal['id']; ?>() {
+                            if (typeof google !== 'undefined') {
+                                var location = {lat: <?php echo $animal['latitud']; ?>, lng: <?php echo $animal['longitud']; ?>};
+                                var map = new google.maps.Map(document.getElementById('map-<?php echo $animal['id']; ?>'), {
+                                    zoom: 12,
+                                    center: location,
+                                    mapTypeId: google.maps.MapTypeId.HYBRID
+                                });
+                                var marker = new google.maps.Marker({
+                                    position: location,
+                                    map: map
+                                });
+                            }
+                        }
+                        <?php endforeach; ?>
                     </script>
                 <?php endforeach; ?>
             <?php else: ?>

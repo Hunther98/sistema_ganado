@@ -1,13 +1,7 @@
 <?php
 require_once '../config/config.php';
 require_once '../negocio/nUsuario.php';
-
-verificarAutenticacion();
-
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: perfil.php?error=Método no permitido');
-    exit;
-}
+session_start();
 
 $nUsuario = new nUsuario();
 $password_confirm = $_POST['password_confirm'] ?? '';

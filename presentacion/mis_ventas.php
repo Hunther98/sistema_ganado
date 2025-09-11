@@ -1,11 +1,8 @@
-[file name]: mis_ventas.php
-[file content begin]
+
 <?php
 require_once '../config/config.php';
 require_once '../negocio/nVenta.php';
-
 verificarAutenticacion('vendedor');
-
 $nVenta = new nVenta();
 $ventas = $nVenta->obtenerVentasPorVendedor($_SESSION['usuario_id']);
 
@@ -17,7 +14,7 @@ $titulo = 'Mis Ventas';
     <h2 class="mb-4">Mis Ventas</h2>
 
     <?php if (isset($_GET['exito'])): ?>
-        <div class="alert alert-success"><?php echo $_GET['exito']; ?></div>
+        <div class="alert alert-success" script=''><?php echo $_GET['exito']; ?></div>
     <?php endif; ?>
     
     <?php if (isset($_GET['error'])): ?>
@@ -117,4 +114,3 @@ $titulo = 'Mis Ventas';
 </div>
 
 <?php include 'template/footer.php'; ?>
-[file content end]

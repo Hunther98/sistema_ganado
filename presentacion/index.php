@@ -1,9 +1,5 @@
 <?php
 require_once '../config/config.php';
-if ($_SESSION['usuario_tipo'] != 'admin' && $_SESSION['usuario_tipo'] != 'vendedor' && $_SESSION['usuario_tipo'] != 'comprador') {
-    header('Location: index.php?error=permisos');
-    exit;
-}
 $titulo = APP_NAME;
 ?>
 <?php include 'template/header.php'; ?>
@@ -86,7 +82,7 @@ $titulo = APP_NAME;
                 </div>
             </div>
         </div>
-    </div>t
+    </div>
 </section>
 
 <!-- Sección de Estadísticas -->

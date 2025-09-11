@@ -1,5 +1,6 @@
 <?php
 require_once '../config/config.php';
+
 // Configuración de la aplicación
 define('APP_NAME', 'Sistema de Venta de Ganado');
 define('APP_VERSION', '1.0.0');
@@ -24,8 +25,8 @@ if (session_status() == PHP_SESSION_NONE) {
 
 // Función para verificar autenticación
 function verificarAutenticacion($tipoRequerido = null) {
-    if (!isset($_SESSION['usuario_id'])) {
-        header('Location: ' . APP_URL . '../presentacion/pLogin.php');
+    if (!isset($_SESSION['usuario_id']) && !isset($_SESSION['admin_id'])) {
+        header('Location: ' . APP_URL . '/presentacion/pLogin.php');
         exit;
     }
     
@@ -57,5 +58,5 @@ define('GOOGLE_MAPS_ENABLED', true);
 // Puedes agregar también configuración para otros servicios
 define('EMAIL_SERVICE_ENABLED', true);
 define('SMS_SERVICE_ENABLED', false);
-
+define('PAYMENT_GATEWAY_ENABLED', false);
 ?>

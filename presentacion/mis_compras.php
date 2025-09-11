@@ -102,5 +102,8 @@ $titulo = 'Mis Compras';
         </div>
     </div>
 </div>
+<script>
+   
+</script>
 
 <?php include 'template/footer.php'; ?>

@@ -75,6 +75,13 @@ class nVenta {
             return array('exito' => false, 'mensaje' => 'Error al actualizar el estado de la venta');
         }
     }
-    
+    public function obtenerVentasPendientesPorUsuario($usuario_id) {
+        $venta = new dVenta();
+        return $venta->obtenerVentasPendientesPorUsuario($usuario_id);
+    }
+    public function obtenerTodasLasVentas() {
+        $dVenta = new dVenta();
+        return $dVenta->obtenerTodas();
+    }
 }
 ?>

@@ -1,5 +1,5 @@
-[file name]: obtener_estadisticas.php
-[file content begin]
+<!-- [file name]: obtener_estadisticas.php
+[file content begin] -->
 <?php
 require_once '../config/config.php';
 require_once '../datos/dConexion.php';
@@ -113,4 +113,4 @@ if (isset($con)) {
     mysqli_close($con);
 }
 ?>
-[file content end]
+<!-- [file content end] -->

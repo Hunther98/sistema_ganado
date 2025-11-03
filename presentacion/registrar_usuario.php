@@ -28,8 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $resultado = $nUsuario->registrarUsuario($nombre, $apellido, $email, $password, $confirm_password, $telefono, $direccion, $tipo, $activo);
     
     if ($resultado['exito']) {
-        header('Location: listar_usuarios.php?exito=' . urlencode($resultado['mensaje']));
-        exit;
+        $resultado_mensaje = $resultado['mensaje'];
     } else {
         $mensaje = $resultado['mensaje'];
     }
@@ -39,7 +38,7 @@ $titulo = 'Registrar Nuevo Usuario';
 ?>
 <?php include 'template/header.php'; ?>
 
-<div class="container py-4">
+<div class="container py-4 scrollable-card">
     <nav aria-label="breadcrumb" class="mb-4">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="listar_usuarios.php">Usuarios</a></li>
@@ -53,9 +52,12 @@ $titulo = 'Registrar Nuevo Usuario';
                 <div class="card-header">
                     <h3 class="card-title">Registrar Nuevo Usuario</h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body srollable-card">
                     <?php if (!empty($mensaje)): ?>
                         <div class="alert alert-danger"><?php echo $mensaje; ?></div>
+                    <?php endif; ?>
+                    <?php if ($resultado['exito']): ?>
+                        <div class="alert alert-success"><?php echo $resultado['mensaje']; ?></div>
                     <?php endif; ?>
 
                     <form method="POST" action="">

@@ -3,11 +3,11 @@ require_once '../config/config.php';
 require_once '../negocio/nUsuario.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'] ?? '';
+    $identificador = $_POST['identificador'] ?? '';
     $password = $_POST['password'] ?? '';
     
     $nUsuario = new nUsuario();
-    $resultado = $nUsuario->iniciarSesion($email, $password);
+    $resultado = $nUsuario->iniciarSesion($identificador, $password);
     
     if ($resultado['exito']) {
         header('Location: index.php');
@@ -64,10 +64,11 @@ if (isset($_SESSION['usuario_id'])) {
                     
                     <form method="POST" action="">
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
+                            <label for="identificador" class="form-label">Email o Nombre de Usuario</label>
                             <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                                <input type="email" class="form-control" id="email" name="email" required>
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                <input type="text" class="form-control" id="identificador" name="identificador" required 
+                                       placeholder="Ingresa tu email o nombre de usuario">
                             </div>
                         </div>
                         <div class="mb-3">

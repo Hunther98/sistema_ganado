@@ -1,5 +1,5 @@
 <?php
-require_once '../datos/dUsuario.php';
+require_once __DIR__ . '/../datos/dUsuario.php';
 
 class nUsuario {
     // Función para registrar usuario
@@ -37,13 +37,13 @@ class nUsuario {
         }
     }
     // Función para iniciar sesión
-    public function iniciarSesion($email, $password) {
-        if (empty($email) || empty($password)) {
-            return array('exito' => false, 'mensaje' => 'Email y contraseña son requeridos');
+    public function iniciarSesion($identificador, $password) {
+        if (empty($identificador) || empty($password)) {
+            return array('exito' => false, 'mensaje' => 'Identificador y contraseña son requeridos');
         }
         
         $dUsuario = new dUsuario();
-        $usuario = $dUsuario->iniciarSesion($email, $password);
+        $usuario = $dUsuario->iniciarSesion($identificador, $password);
         
         if ($usuario) {
             // Iniciar sesión
@@ -63,6 +63,11 @@ class nUsuario {
         $dUsuario = new dUsuario();
         return $dUsuario->obtenerTodos();
     }
+    function listarUsuarios() {
+        $dUsuario = new dUsuario();
+        $resultado = $dUsuario->mostrarUsuarios();
+        return $resultado;
+    }
     // Función para obtener usuario por ID
     public function obtenerUsuario($id) {
         $dUsuario = new dUsuario();
@@ -70,7 +75,7 @@ class nUsuario {
     }
     public function actualizarUsuario($id, $nombre, $apellido, $email, $telefono, $direccion, $tipo, $activo) {
         // Validaciones de negocio
-        if (empty($id) || empty($nombre) || empty($apellido) || empty($email) || empty($tipo)) {
+        if ( empty($nombre) || empty($apellido) || empty($email) || empty($tipo)) {
             return array('exito' => false, 'mensaje' => 'Todos los campos obligatorios deben ser completados');
         }
         
@@ -80,9 +85,9 @@ class nUsuario {
         
         // Verificar si el email ya existe (excluyendo el usuario actual)
         $dUsuario = new dUsuario();
-        if ($dUsuario->emailExiste($email, $id)) {
-            return array('exito' => false, 'mensaje' => 'Ya existe un usuario con ese email');
-        }
+        // if ($dUsuario->emailExiste($email, $id)) {
+        //     return array('exito' => false, 'mensaje' => 'Ya existe un usuario con ese email');
+        // }
         
         $resultado = $dUsuario->actualizar($id, $nombre, $apellido, $email, $telefono, $direccion, $tipo, $activo);
         
@@ -107,7 +112,7 @@ class nUsuario {
             return array('exito' => false, 'mensaje' => 'Error al eliminar el usuario');
         }
     }
-  public function eliminarCuenta($usuario_id, $password_confirm) {
+    public function eliminarCuenta($usuario_id, $password_confirm) {
     // Validaciones de negocio
     if (empty($usuario_id)) {
         return array('exito' => false, 'mensaje' => 'ID de usuario es requerido');
@@ -132,7 +137,7 @@ class nUsuario {
     }
     
     // Verificar si el usuario tiene ganado registrado
-    require_once '../datos/dGanado.php';
+    require_once __DIR__ . '/../datos/dGanado.php';
     $dGanado = new dGanado();
     $ganado_usuario = $dGanado->obtenerPorUsuario($usuario_id);
     
@@ -141,7 +146,7 @@ class nUsuario {
     }
     
     // Verificar si el usuario tiene ventas pendientes
-    require_once '../datos/dVenta.php';
+    require_once __DIR__ . '/../datos/dVenta.php';
     $dVenta = new dVenta();
     $ventas_pendientes = $dVenta->obtenerVentasPendientesPorUsuario($usuario_id);
     
@@ -157,6 +162,10 @@ class nUsuario {
     } else {
         return array('exito' => false, 'mensaje' => 'Error al eliminar la cuenta');
     }
+}
+public function obtenerUsuarioPorId($id){
+    $dUsuario = new dUsuario();
+    return $dUsuario->obtenerPorId($id);
 }
 
 // Función para cerrar sesión

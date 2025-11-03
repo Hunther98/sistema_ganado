@@ -25,7 +25,7 @@ class dVacunacion {
         
         try {
             $con = $cone->Conectar();
-            $sql = "INSERT INTO vacunaciones (ganado_id, vacuna, fecha_vacunacion, proxima_vacunacion, observaciones) VALUES (?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO vacunas (ganado_id, vacuna, fecha_vacunacion, proxima_vacunacion, observaciones) VALUES (?, ?, ?, ?, ?)";
             
             $stmt = mysqli_prepare($con, $sql);
             mysqli_stmt_bind_param($stmt, "issss", 
@@ -57,7 +57,7 @@ class dVacunacion {
         
         try {
             $con = $cone->Conectar();
-            $sql = "SELECT * FROM vacunaciones WHERE ganado_id = ? ORDER BY fecha_vacunacion DESC";
+            $sql = "SELECT * FROM vacunas WHERE ganado_id = ? ORDER BY fecha_vacunacion DESC";
             $stmt = mysqli_prepare($con, $sql);
             mysqli_stmt_bind_param($stmt, "i", $ganado_id);
             mysqli_stmt_execute($stmt);
@@ -83,7 +83,7 @@ class dVacunacion {
         
         try {
             $con = $cone->Conectar();
-            $sql = "SELECT * FROM vacunaciones WHERE id = ?";
+            $sql = "SELECT * FROM vacunas WHERE id = ?";
             $stmt = mysqli_prepare($con, $sql);
             mysqli_stmt_bind_param($stmt, "i", $id);
             mysqli_stmt_execute($stmt);
@@ -109,7 +109,7 @@ class dVacunacion {
         
         try {
             $con = $cone->Conectar();
-            $sql = "UPDATE vacunaciones SET vacuna = ?, fecha_vacunacion = ?, proxima_vacunacion = ?, observaciones = ? WHERE id = ?";
+            $sql = "UPDATE vacunas SET vacuna = ?, fecha_vacunacion = ?, proxima_vacunacion = ?, observaciones = ? WHERE id = ?";
             
             $stmt = mysqli_prepare($con, $sql);
             mysqli_stmt_bind_param($stmt, "ssssi", 
@@ -137,7 +137,7 @@ class dVacunacion {
         
         try {
             $con = $cone->Conectar();
-            $sql = "DELETE FROM vacunaciones WHERE id = ?";
+            $sql = "DELETE FROM vacunas WHERE id = ?";
             $stmt = mysqli_prepare($con, $sql);
             mysqli_stmt_bind_param($stmt, "i", $id);
             

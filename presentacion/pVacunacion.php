@@ -14,10 +14,10 @@ $id = $_GET['id'] ?? 0;
 $mensaje = '';
 
 // Verificar que el ganado pertenece al usuario
-if ($ganado_id > 0) {
+    if ($ganado_id > 0) {
     $ganado = $nGanado->obtenerPorId($ganado_id);
     if (!$ganado || $ganado['usuario_id'] != $_SESSION['usuario_id']) {
-        header('Location: listar_ganado.php?error=No tienes permisos para gestionar este animal');
+        header('Location: admin/listar_ganado.php?error=No tienes permisos para gestionar este animal');
         exit;
     }
 }
@@ -85,7 +85,7 @@ $titulo = $accion == 'agregar' ? 'Registrar Vacunación' : 'Editar Vacunación';
                         <small class="text-muted">- <?php echo $ganado['nombre']; ?></small>
                     </h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body srollable-card">
                     <?php if (!empty($mensaje)): ?>
                         <div class="alert alert-danger"><?php echo $mensaje; ?></div>
                     <?php endif; ?>

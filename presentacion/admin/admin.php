@@ -1,9 +1,9 @@
 <?php
-require_once '../config/config.php';
+require_once __DIR__ . '/../../config/config.php';
 verificarAutenticacion('admin');
-require_once '../negocio/nUsuario.php';
-require_once '../negocio/nGanado.php';
-require_once '../negocio/nVenta.php';
+require_once __DIR__ . '/../../negocio/nUsuario.php';
+require_once __DIR__ . '/../../negocio/nGanado.php';
+require_once __DIR__ . '/../../negocio/nVenta.php';
 
 $nUsuario = new nUsuario();
 $nGanado = new nGanado();
@@ -20,10 +20,12 @@ $usuariosRecientes = array_slice($nUsuario->obtenerTodosLosUsuarios(), 0, 5);
 $ganadoReciente = array_slice($nGanado->obtenerTodos(), 0, 5);
 
 $titulo = 'Panel de Administración';
+$rootPath = '../';
 ?>
-<?php include 'template/header.php'; ?>
 
-<div class="container-fluid py-4">
+<?php include __DIR__ . '/../template/header.php'; ?>
+
+<div class="container-fluid py-4 scrollable-admin">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Panel de Administración</h2>
         <span class="badge bg-primary">Admin</span>
@@ -133,7 +135,7 @@ $titulo = 'Panel de Administración';
             <div class="card">
                 <div class="card-header bg-light d-flex justify-content-between align-items-center">
                     <h5 class="mb-0">Ganado Reciente</h5>
-                    <a href="detalle_ganado.php" class="btn btn-sm btn-primary">Ver Todo</a>
+                    <a href="../detalle_ganado.php" class="btn btn-sm btn-primary">Ver Todo</a>
                 </div>
                 <div class="card-body">
                     <?php if (count($ganadoReciente) > 0): ?>
@@ -191,12 +193,12 @@ $titulo = 'Panel de Administración';
                             </a>
                         </div>
                         <div class="col-md-3 mb-2">
-                            <a href="registrar_usuario.php" class="btn btn-outline-success w-100">
+                            <a href="../registrar_usuario.php" class="btn btn-outline-success w-100">
                                 <i class="fas fa-user-plus"></i> Nuevo Usuario
                             </a>
                         </div>
                         <div class="col-md-3 mb-2">
-                            <a href="../utilidades/logout.php" class="btn btn-outline-danger w-100">
+                            <a href="../../utilidades/logout.php" class="btn btn-outline-danger w-100">
                                 <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
                             </a>
                         </div>
@@ -207,4 +209,4 @@ $titulo = 'Panel de Administración';
     </div>
 </div>
 
-<?php include 'template/footer.php'; ?>
+<?php include __DIR__ . '/../template/footer.php'; ?>

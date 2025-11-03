@@ -39,8 +39,9 @@ class dGanado {
         
         try {
             $con = $cone->Conectar();
-            $sql = "INSERT INTO ganado (usuario_id, nombre, descripcion, raza, edad, peso, precio, imagen, ubicacion, latitud, longitud) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            
+            // $sql = "INSERT INTO ganado (usuario_id, nombre, descripcion, raza, edad, peso, precio, imagen, ubicacion, latitud, longitud) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "CALL sp_registrar_usuario(?, ?, ?, ?, ?, ?, ?, @usuario_id)";
+
             $stmt = mysqli_prepare($con, $sql);
             mysqli_stmt_bind_param($stmt, "isssiddssdd", 
                 $this->usuario_id,
@@ -230,8 +231,9 @@ class dGanado {
         
         try {
             $con = $cone->Conectar();
-            $sql = "UPDATE ganado SET nombre = ?, descripcion = ?, raza = ?, edad = ?, peso = ?, precio = ?, imagen = ?, ubicacion = ?, latitud = ?, longitud = ? WHERE id = ? AND usuario_id = ?";
-            
+            // $sql = "UPDATE ganado SET nombre = ?, descripcion = ?, raza = ?, edad = ?, peso = ?, precio = ?, imagen = ?, ubicacion = ?, latitud = ?, longitud = ? WHERE id = ? AND usuario_id = ?";
+            $sql = "CALL sp_actualizar_usuario(?, ?, ?, ?, ?, ?, ?, ?)";
+
             $stmt = mysqli_prepare($con, $sql);
             mysqli_stmt_bind_param($stmt, "sssiddssddii", 
                 $this->nombre,
@@ -265,7 +267,9 @@ class dGanado {
         
         try {
             $con = $cone->Conectar();
-            $sql = "DELETE FROM ganado WHERE id = ? AND usuario_id = ?";
+            // $sql = "DELETE FROM ganado WHERE id = ? AND usuario_id = ?";
+            $sql = "CALL sp_eliminar_usuario_logico(?, ?, ?)";
+
             $stmt = mysqli_prepare($con, $sql);
             mysqli_stmt_bind_param($stmt, "ii", $id, $usuario_id);
             
@@ -279,6 +283,56 @@ class dGanado {
         return $respuesta;
     }
 
+     function restaurarUsuario($id) {
+        $cone = new dConexion();
+        $respuesta = false;
+        
+        try {
+            $con = $cone->Conectar();
+            
+            // Llamar al procedimiento almacenado
+            $sql = "CALL sp_restaurar_usuario(?)";
+            $stmt = mysqli_prepare($con, $sql);
+            mysqli_stmt_bind_param($stmt, "i", $id);
+            
+            $respuesta = mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+            mysqli_close($con);
+        } catch (Exception $exc) {
+            echo "Error al restaurar usuario: " . $exc->getMessage();
+        }
+        
+        return $respuesta;
+    }
+    
+    // Obtener todos los usuarios (sin cambios, es una consulta simple)
+    function obtenerTodosLosUsuarios() {
+        $cone = new dConexion();
+        $usuarios = [];
+        
+        try {
+            $con = $cone->Conectar();
+            $sql = "SELECT id, nombre, apellido, email, telefono, direccion, tipo, activo, 
+                           cuenta_inactiva, fecha_registro, eliminado, fecha_eliminacion
+                    FROM usuarios 
+                    WHERE eliminado = FALSE 
+                    ORDER BY fecha_registro DESC";
+            $result = mysqli_query($con, $sql);
+            
+            while ($row = mysqli_fetch_assoc($result)) {
+                $usuarios[] = $row;
+            }
+            
+            mysqli_free_result($result);
+            mysqli_close($con);
+        } catch (Exception $exc) {
+            echo "Error al obtener usuarios: " . $exc->getMessage();
+        }
+        
+        return $usuarios;
+    }
+    
+    // Función para actualizar el estado del ganado (disponible, vendido, reservado)
     public function actualizarEstado($ganado_id, $estado) {
         $cone = new dConexion();
         $respuesta = false;

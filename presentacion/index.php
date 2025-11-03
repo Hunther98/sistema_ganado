@@ -1,9 +1,12 @@
 <?php
 require_once '../config/config.php';
+verificarAutenticacion();
 $titulo = APP_NAME;
 ?>
 <?php include 'template/header.php'; ?>
 
+<!-- como ver que usuario ha iniciado sesion en la pagina y su nombre -->
+ 
 <!-- Sección Hero -->
 <section class="hero-section imagen-hero">
     <div class="container">
@@ -86,8 +89,8 @@ $titulo = APP_NAME;
 </section>
 
 <!-- Sección de Estadísticas -->
-<section class="py-5 bg-light">
-    <div class="container">
+<section class="m-5 py-5 bg-gradient rounded ">
+    <div class="container-fluid">
         <div class="row text-center">
             <div class="col">
                 <h3>Nuestros Números</h3>
@@ -99,7 +102,9 @@ $titulo = APP_NAME;
                 <div class="card bg-primary text-white">
                     <div class="card-body text-center">
                         <i class="fas fa-users fa-2x mb-2"></i>
-                        <h4 id="total-usuarios">-</h4>
+                        <h4 id="total-usuarios">
+                            <?php echo $estadisticas['usuarios'] ?? 0; ?>
+                        </h4>
                         <p>Usuarios Registrados</p>
                     </div>
                 </div>
@@ -137,7 +142,7 @@ $titulo = APP_NAME;
 
 <!-- Sección de Testimonios -->
 <section class="py-5">
-    <div class="container">
+    <div class="container bg-gradient rounded">
         <div class="row text-center mb-5">
             <div class="col">
                 <h2>Testimonios</h2>

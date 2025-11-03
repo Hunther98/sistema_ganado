@@ -1,5 +1,5 @@
 <?php
-require_once '../config/config.php';
+require_once __DIR__ . '/../../config/config.php';
 
 // Verificar autenticación solo si no está en páginas públicas
 $pagina_actual = basename($_SERVER['PHP_SELF']);
@@ -18,17 +18,86 @@ if (!isset($_SESSION['usuario_id']) && !in_array($pagina_actual, $paginas_public
     <title><?php echo $titulo ?? APP_NAME; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+    <?php $rootPath = $rootPath ?? ''; ?>
+    <link rel="stylesheet" href="<?php echo $rootPath; ?>css/styles.css">
 
     <style>
+        body{
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: linear-gradient(to right, #127da0, #B721FF, #0837af);
+            height: 100vh;
+        }
+    .navbar{
+            background: linear-gradient(135deg, #064a13ff 0%, #0ba227ff, #25ff04ff 100%);
+            padding: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        h2,h3{
+            color: black;
+        }
+        .navbar-brand {
+            font-weight: bold;
+        }
+        .hero-section {
+            color: black;
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(to right, #127da0, #21deffff, #54abdbff);
+
+        }
+        .imagen-hero {
+            background-image: url('<?php echo $rootPath; ?>uploads/68b91dbf30aac_1756962239.jpeg');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .nav-item:hover{
+            background-color: #343a40;
+            border-radius: 10px;
+        }
+        .feature-card {
+            border: none;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.79);
+            transition: transform 0.3s;
+            height: 100%;
+            background: linear-gradient(to right, #127da0, #21deffff, #54abdbff);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
         
+        .footer {
+            position: relative;
+            background-color: #343a40;
+            color: white;
+            width: 100%;
+            z-index: 1000;
+            padding-top: 30px;
+            bottom: 0%;
+            left: 0;
+            right: 0;
+            top: 30%;
+        }
+        .scrollable-card {
+            max-height: 100%;
+            overflow-y: auto;
+        }
     </style>
 </head>
 <body>
     <!-- Navegación -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="index.php">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+        <div class="container-fluid mt-2 mb-2">
+            <a class="navbar-brand" href="<?php echo $rootPath; ?>index.php">
                 <i class="fas fa-cow"></i>
                 <?php echo APP_NAME; ?>
             </a>
@@ -38,36 +107,44 @@ if (!isset($_SESSION['usuario_id']) && !in_array($pagina_actual, $paginas_public
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php">Inicio</a>
+                        <a class="nav-link" href="<?php echo $rootPath; ?>index.php">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="catalogo.php">Catálogo</a>
+                        <a class="nav-link" href="<?php echo $rootPath; ?>catalogo.php">Catálogo</a>
                     </li>
                     <?php if (isset($_SESSION['usuario_id'])): ?>
                         <?php if ($_SESSION['usuario_tipo'] == 'vendedor'): ?>
+                            
                             <li class="nav-item">
-                                <a class="nav-link" href="pGanado.php?accion=agregar">Publicar Ganado</a>
+                                <a class="nav-link" href="<?php echo $rootPath; ?>pGanado.php?accion=agregar">Publicar Ganado</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="listar_ganado.php">Mis Animales</a>
+                                <a class="nav-link" href="<?php echo $rootPath; ?>admin/listar_ganado.php">Mis Animales</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="mis_ventas.php">Mis Ventas</a>
+                                <a class="nav-link" href="<?php echo $rootPath; ?>mis_ventas.php">Mis Ventas</a>
                             </li>
                         <?php endif; ?>
                         <?php if ($_SESSION['usuario_tipo'] == 'comprador'): ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="mis_compras.php">Mis Compras</a>
+                                <a class="nav-link" href="<?php echo $rootPath; ?>mis_compras.php">Mis Compras</a>
                             </li>
                         <?php endif; ?>
                     <?php endif; ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="pContacto.php">Contacto</a>
+                        <a class="nav-link" href="<?php echo $rootPath; ?>pContacto.php">Contacto</a>
                     </li>
                     <?php if (isset($_SESSION['usuario_id']) && $_SESSION['usuario_tipo'] == 'admin'): ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="admin.php">Panel Admin</a>
+                            <a class="nav-link" href="<?php echo $rootPath; ?>admin/admin.php">Panel Admin</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo $rootPath; ?>admin/ver_tablas.php">Ver Tablas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo $rootPath; ?>admin/listarReportesParametrizados.php">Reportes</a>
+                        </li>
+
                     <?php endif; ?>
                 </ul>
                 <ul class="navbar-nav ms-auto">
@@ -77,23 +154,24 @@ if (!isset($_SESSION['usuario_id']) && !in_array($pagina_actual, $paginas_public
                                 <i class="fas fa-user"></i> <?php echo $_SESSION['usuario_nombre']; ?>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="perfil.php">Mi Perfil</a></li>
+                                <li><a class="dropdown-item" href="<?php echo $rootPath; ?>perfil.php">Mi Perfil</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="../utilidades/logout.php">Cerrar Sesión</a></li>
+                                <li><a class="dropdown-item" href="<?php echo $rootPath; ?>../utilidades/logout.php">Cerrar Sesión</a></li>
                             </ul>
                         </li>
                     <?php else: ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="pLogin.php">Iniciar Sesión</a>
+                            <a class="nav-link" href="<?php echo $rootPath; ?>pLogin.php">Iniciar Sesión</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="pRegistro.php">Registrarse</a>
+                            <a class="nav-link" href="<?php echo $rootPath; ?>pRegistro.php">Registrarse</a>
                         </li>
                     <?php endif; ?>
                 </ul>
             </div>
         </div>
     </nav>
+    <!-- aside -->
 
     <!-- Contenido principal -->
-    <main>
+    <main class="scrollable-main  container-fluid" style="padding-top: 80px; padding-bottom: 80px;">

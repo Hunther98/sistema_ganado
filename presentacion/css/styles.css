@@ -1,15 +1,12 @@
-main {
-    min-height: 75vh;
+
+    nav{
+       background-color: linear-gradient(to right, #0b871fff 0%, #73f55fff 100%);
+        font-weight: bold;
     }
-        nav{
-           background-color: linear-gradient(to right, #0b871fff 0%, #73f55fff 100%);
-            font-weight: bold;
-        }
         .hero-section { 
             color: white;
             padding: 80px 0;
             text-align: center;
-             
 
         }
         .imagen-hero {

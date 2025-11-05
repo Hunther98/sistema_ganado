@@ -19,6 +19,7 @@ if (!$usuario) {
     header('Location: listar_usuario.php?error=Usuario no encontrado');
     exit;
 }
+
 // Procesar formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = $_POST['nombre'] ?? '';
@@ -143,9 +144,8 @@ $rootPath = '../';
                                 <?php echo date('d/m/Y H:i', strtotime($usuario['fecha_registro'])); ?>
                             </div>
                         </div>
-
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary btn-lg">Actualizar Usuario</button>
+                            <button type="submit" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modalExito">Actualizar Usuario</button>
                             <a href="listar_usuario.php" class="btn btn-secondary">Cancelar</a>
                         </div>
                     </form>
@@ -154,6 +154,29 @@ $rootPath = '../';
         </div>
     </div>
 </div>
+<!-- modal de exito -->
+<div class="modal fade" id="modalExito" tabindex="-1" aria-labelledby="modalExitoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalExitoLabel">Éxito</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                El usuario ha sido actualizado exitosamente.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    <?php if (isset($resultado) && $resultado['exito'] == true): ?>
+        var myModal = new bootstrap.Modal(document.getElementById('modalExito'));
+        myModal.show();
+    <?php endif; ?>
+</script>
 
 <?php include __DIR__ . '/../template/footer.php'; ?>
 

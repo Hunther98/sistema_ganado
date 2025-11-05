@@ -8,13 +8,10 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 // Verificar autenticación
-function verificarAutenticacion() {
-    if (!isset($_SESSION['usuario_id'])) {
-        header('Location: ../index.php?error=Debes iniciar sesión');
-        exit;
-    }
+if (!isset($_SESSION['usuario_id'])) {
+    header('Location: ../index.php?error=Debes iniciar sesión');
+    exit;
 }
-
 // Verificar método POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: ../perfil.php?error=Método no permitido');
@@ -71,3 +68,16 @@ try {
     exit;
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Cuenta Eliminada</h1>
+    <p>Tu cuenta ha sido eliminada exitosamente.</p>
+    <a href="../index.php">Volver al inicio</a>
+</body>
+</html>

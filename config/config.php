@@ -3,7 +3,7 @@
 define('APP_NAME', 'Sistema de Venta de Ganado');
 define('APP_VERSION', '1.0.0');
 // Ajusta el APP_URL según tu entorno (XAMPP normalmente usa http://localhost/<carpeta>)
-define('APP_URL', 'http://localhost/sistema_ganado_septiembre');
+define('APP_URL', 'http://localhost:8080//sistema_ganado_septiembre');
 
 // Configuración de la base de datos
 define('DB_HOST', 'localhost');
@@ -28,10 +28,6 @@ if (empty($_SESSION)) {
 if (!empty($_SESSION)) {
     // Regenerar ID de sesión para mayor seguridad
     session_regenerate_id(true);
-}
-if (!isset($_SESSION['usuario_id'])) {
-    // Si no hay usuario logueado, destruir la sesión
-    session_destroy();
 }
 if (isset($_SESSION['ultimo_acceso'])) {
     $inactividad = 1800; // 30 minutos
@@ -59,6 +55,11 @@ function verificarAutenticacion($tipoRequerido = null) {
 
     return true;
 }
+function obtenerEstadisticasGenerales() {
+    require_once __DIR__ . '/../negocio/nEstadisticas.php';
+    $nEstadisticas = new nEstadisticas();
+    return $nEstadisticas->obtenerEstadisticasGenerales();
+}
 
 function usuarioPuedeEliminarCuenta($usuario_id) {
     // Evitar dependencias con rutas relativas imprecisas
@@ -73,6 +74,9 @@ function usuarioPuedeEliminarCuenta($usuario_id) {
     }
     return true;
 }
+// Configuración de correo electrónico (placeholder)
+define('EMAIL_FROM_ADDRESS', 'noreply@sistemaganado.com');
+
 
 // Configuración de APIs externas (placeholder)
 define('GOOGLE_MAPS_API_KEY', 'TU_API_KEY_AQUI');

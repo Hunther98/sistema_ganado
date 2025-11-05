@@ -44,7 +44,7 @@ if (!isset($_SESSION['usuario_id']) && !in_array($pagina_actual, $paginas_public
         }
         .hero-section {
             color: black;
-            padding: 80px 0;
+            margin: 0px;
             text-align: center;
             background: linear-gradient(to right, #127da0, #21deffff, #54abdbff);
 

@@ -1,5 +1,4 @@
-[file name]: detalle_ganado.php
-[file content begin]
+
 <?php
 require_once '../config/config.php';
 require_once '../negocio/nGanado.php';

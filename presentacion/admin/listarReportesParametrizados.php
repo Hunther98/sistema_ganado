@@ -16,14 +16,13 @@ verificarAutenticacion();
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
             min-height: 100vh;
             background: linear-gradient(to right, #127da0, #B721FF, #0837af);
         }
         
         .container-main {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 10px auto;
         }
         
         .search-container {
@@ -261,3 +260,4 @@ verificarAutenticacion();
     </script>
 </body>
 </html>
+<?php require_once __DIR__ . '/../template/footer.php'; ?>

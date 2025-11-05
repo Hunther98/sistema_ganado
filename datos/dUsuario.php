@@ -116,7 +116,7 @@ class dUsuario {
         
         try {
             $con = $cone->Conectar();
-            $sql = "SELECT id, nombre, apellido, email, telefono, direccion, tipo, fecha_registro FROM usuarios WHERE id = ? AND activo = 1";
+            $sql = "SELECT nombre, apellido, email, telefono, direccion, tipo, fecha_registro FROM usuarios WHERE id = ? AND (activo = 1 OR activo = 0)";
             $stmt = mysqli_prepare($con, $sql);
             mysqli_stmt_bind_param($stmt, "i", $id);
             mysqli_stmt_execute($stmt);

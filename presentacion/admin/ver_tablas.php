@@ -131,7 +131,7 @@ $rootPath = '../';
                                                         if (is_null($valor)) {
                                                             echo '<span class="text-muted">NULL</span>';
                                                         } elseif (empty($valor)) {
-                                                            echo '<span class="text-muted">Vacío</span>';
+                                                            echo '<span class="text-muted">0</span>';
                                                         } elseif (strlen($valor) > 50) {
                                                             echo substr($valor, 0, 50) . '...';
                                                         } else {
@@ -165,4 +165,3 @@ $rootPath = '../';
     </div>
 </div>
 
-<?php include __DIR__ . '/../template/footer.php'; ?>

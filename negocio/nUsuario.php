@@ -63,6 +63,7 @@ class nUsuario {
         $dUsuario = new dUsuario();
         return $dUsuario->obtenerTodos();
     }
+    // Función para listar usuarios
     function listarUsuarios() {
         $dUsuario = new dUsuario();
         $resultado = $dUsuario->mostrarUsuarios();
@@ -73,6 +74,7 @@ class nUsuario {
         $dUsuario = new dUsuario();
         return $dUsuario->obtenerPorId($id);
     }
+    // Función para actualizar usuario
     public function actualizarUsuario($id, $nombre, $apellido, $email, $telefono, $direccion, $tipo, $activo) {
         // Validaciones de negocio
         if ( empty($nombre) || empty($apellido) || empty($email) || empty($tipo)) {

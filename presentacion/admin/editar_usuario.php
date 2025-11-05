@@ -19,7 +19,6 @@ if (!$usuario) {
     header('Location: listar_usuario.php?error=Usuario no encontrado');
     exit;
 }
-
 // Procesar formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = $_POST['nombre'] ?? '';

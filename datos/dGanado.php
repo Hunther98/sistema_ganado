@@ -39,8 +39,8 @@ class dGanado {
         
         try {
             $con = $cone->Conectar();
-            // $sql = "INSERT INTO ganado (usuario_id, nombre, descripcion, raza, edad, peso, precio, imagen, ubicacion, latitud, longitud) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $sql = "CALL sp_registrar_usuario(?, ?, ?, ?, ?, ?, ?, @usuario_id)";
+            $sql = "INSERT INTO ganado (usuario_id, nombre, descripcion, raza, edad, peso, precio, imagen, ubicacion, latitud, longitud) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            // $sql = "CALL sp_registrar_usuario(?, ?, ?, ?, ?, ?, ?, @usuario_id)";
 
             $stmt = mysqli_prepare($con, $sql);
             mysqli_stmt_bind_param($stmt, "isssiddssdd", 

@@ -198,7 +198,7 @@ class dUsuario {
     
         try {
             $con = $cone->Conectar();
-            $sql = "DELETE FROM usuarios WHERE id = ?";
+            $sql = "UPDATE usuarios SET activo = 0 WHERE id = ?";
             $stmt = mysqli_prepare($con, $sql);
             mysqli_stmt_bind_param($stmt, "i", $id);
             

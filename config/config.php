@@ -35,6 +35,8 @@ if (isset($_SESSION['ultimo_acceso'])) {
         // Tiempo de inactividad excedido, destruir sesión
         session_unset();
         session_destroy();
+        header('Location: ' . APP_URL . '/presentacion/pLogin.php?mensaje=sesion_expirada');
+        exit;
     }
 }
 if (isset($_SESSION['usuario_id'])) {

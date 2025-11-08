@@ -19,13 +19,18 @@ if (isset($_GET['exito'])) {
     $mensajeExito = urldecode($_GET['exito']);
     echo '<script>Swal.fire("Éxito", "' . $mensajeExito . '", "success");</script>';
 }
+if (isset($_GET['error'])) {
+    $mensajeError = urldecode($_GET['error']);
+    echo '<script>Swal.fire("Error", "' . $mensajeError . '", "error");</script>';
+}
+$rootPath = '../';
 ?>
 <?php include __DIR__ . '/../template/header.php'; ?>
 
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Gestión de Usuarios</h2>
-        <a href="../registrar_usuario.php" class="btn btn-success">
+        <a href="/presentacion/pRegistro.php" class="btn btn-success">
             <i class="fas fa-user-plus"></i> Nuevo Usuario
         </a>
     </div>

@@ -30,8 +30,8 @@ $estadisticas = obtenerEstadisticasGenerales();
     </div>
 </section>
 
-<!-- Sección de Funciones -->
-<section class="py-5">
+<!-- Sección de Fun ciones -->
+<section class="py-5 py-5 bg-gradient rounded" >
     <div class="container">
         <div class="row text-center mb-5">
             <div class="col">

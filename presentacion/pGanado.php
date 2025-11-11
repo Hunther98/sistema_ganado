@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
         
         if ($resultado['exito']) {
-            header('Location: listar_ganado.php?exito=' . urlencode($resultado['mensaje']));
+            header('Location: admin/listar_ganado.php?exito=' . urlencode($resultado['mensaje']));
             exit;
         } else {
             $mensaje = $resultado['mensaje'];
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         );
         
         if ($resultado['exito']) {
-            header('Location: listar_ganado.php?exito=' . urlencode($resultado['mensaje']));
+            header('Location: admin/listar_ganado.php?exito=' . urlencode($resultado['mensaje']));
             exit;
         } else {
             $mensaje = $resultado['mensaje'];
@@ -72,8 +72,8 @@ if ($accion == 'editar' && $id > 0) {
     $ganado = $nGanado->obtenerPorId($id);
     
     // Verificar que el ganado pertenece al usuario
-    if (!$ganado || $ganado['usuario_id'] != $_SESSION['usuario_id']) {
-        header('Location: listar_ganado.php?error=No tienes permisos para editar este animal');
+        if (!$ganado || $ganado['usuario_id'] != $_SESSION['usuario_id']) {
+        header('Location: admin/listar_ganado.php?error=No tienes permisos para editar este animal');
         exit;
     }
 }
@@ -183,7 +183,7 @@ $titulo = $accion == 'agregar' ? 'Publicar Ganado' : 'Editar Ganado';
                             <button type="submit" class="btn btn-primary btn-lg">
                                 <?php echo $accion == 'agregar' ? 'Publicar Ganado' : 'Actualizar'; ?>
                             </button>
-                            <a href="listar_ganado.php" class="btn btn-secondary">Cancelar</a>
+                            <a href="admin/listar_ganado.php" class="btn btn-secondary">Cancelar</a>
                         </div>
                     </form>
                 </div>

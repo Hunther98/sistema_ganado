@@ -1,0 +1,59 @@
+# .htaccess para /sistema_ganado_septiembre
+# Evita listado de directorios
+Options -Indexes
+
+# Encabezados de seguridad básicos
+<IfModule mod_headers.c>
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "no-referrer-when-downgrade"
+</IfModule>
+
+# Protege archivos sensibles (.env, .git, composer, etc.)
+<FilesMatch "(^\.env$|^\.git|^composer\.(json|lock)$)">
+    <IfModule !mod_authz_core.c>
+        Deny from all
+    </IfModule>
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+</FilesMatch>
+
+# Protege archivos que comienzan por .ht (incluyendo este .htaccess)
+<Files ~ "^\.ht">
+    <IfModule !mod_authz_core.c>
+        Deny from all
+    </IfModule>
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+</Files>
+
+# Reescritura para front controller (index.php)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /sistema_ganado_septiembre/
+
+    # Forzar HTTPS (opcional) - descomentar si quiere forzar
+    #RewriteCond %{HTTPS} !=on
+    #RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Redirigir a index.php si no existe el fichero/dir
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L,QSA]
+</IfModule>
+
+# Codificación por defecto
+AddDefaultCharset UTF-8
+
+# Tipos MIME básicos
+<IfModule mod_mime.c>
+    AddType application/javascript .js
+    AddType text/css .css
+</IfModule>
+
+# Ajustes PHP (si Apache corre PHP como módulo) - opcional
+# php_value upload_max_filesize 16M
+# php_value post_max_size 20M

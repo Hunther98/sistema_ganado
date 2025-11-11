@@ -114,7 +114,7 @@ $titulo = 'Mi Perfil';
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <a href="confirmar_eliminacion.php" class="btn btn-outline-danger">
+                <a href="admin/confirmar_eliminacion.php" class="btn btn-outline-danger">
                     <i class="fas fa-trash"></i> Eliminar Cuenta
                 </a>
             </div>
@@ -134,15 +134,15 @@ $titulo = 'Mi Perfil';
                     <i class="fas fa-exclamation-triangle"></i>
                     <strong>Advertencia: Esta acción no se puede deshacer</strong>
                 </div>
-                
+
                 <p>Para confirmar que eres el propietario de esta cuenta, ingresa tu contraseña:</p>
-                
-                <form method="POST" action="procesar_eliminar_cuenta.php" id="formEliminarCuenta">
+
+                <form method="POST" action="admin/procesar_eliminar_cuenta.php" id="formEliminarCuenta">
                     <div class="mb-3">
                         <label for="password_confirm" class="form-label">Contraseña *</label>
                         <input type="password" class="form-control" id="password_confirm" name="password_confirm" required>
                     </div>
-                    
+
                     <div class="alert alert-warning">
                         <h6><i class="fas fa-info-circle"></i> ¿Qué sucede cuando eliminas tu cuenta?</h6>
                         <ul class="small">
@@ -152,13 +152,13 @@ $titulo = 'Mi Perfil';
                             <li>No podrás recuperar tu cuenta después de la eliminación</li>
                         </ul>
                     </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-outline-danger">
+                            <i class="fas fa-trash"></i> Eliminar Cuenta
+                        </button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <a href="confirmar_eliminacion.php" class="btn btn-outline-danger">
-    <i class="fas fa-trash"></i> Eliminar Cuenta
-</a>
             </div>
         </div>
     </div>

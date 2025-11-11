@@ -1,11 +1,16 @@
 <?php
 require_once '../config/config.php';
+verificarAutenticacion();
 $titulo = APP_NAME;
+$estadisticas = obtenerEstadisticasGenerales();
+
 ?>
 <?php include 'template/header.php'; ?>
 
+<!-- como ver que usuario ha iniciado sesion en la pagina y su nombre -->
+ 
 <!-- Sección Hero -->
-<section class="hero-section imagen-hero">
+<section class="hero-section imagen-hero ">
     <div class="container">
         <h1 class="display-4 mb-4">
             <i class="fas fa-cow"></i>
@@ -86,8 +91,8 @@ $titulo = APP_NAME;
 </section>
 
 <!-- Sección de Estadísticas -->
-<section class="py-5 bg-light">
-    <div class="container">
+<section class="m-5 py-5 bg-gradient rounded ">
+    <div class="container-fluid">
         <div class="row text-center">
             <div class="col">
                 <h3>Nuestros Números</h3>
@@ -99,7 +104,9 @@ $titulo = APP_NAME;
                 <div class="card bg-primary text-white">
                     <div class="card-body text-center">
                         <i class="fas fa-users fa-2x mb-2"></i>
-                        <h4 id="total-usuarios">-</h4>
+                        <h4 id="total-usuarios">
+                            <?php echo $estadisticas['total_usuarios'] ?? 0; ?>
+                        </h4>
                         <p>Usuarios Registrados</p>
                     </div>
                 </div>
@@ -108,7 +115,9 @@ $titulo = APP_NAME;
                 <div class="card bg-success text-white">
                     <div class="card-body text-center">
                         <i class="fas fa-cow fa-2x mb-2"></i>
-                        <h4 id="total-ganado">-</h4>
+                        <h4 id="total-ganado">
+                            <?php echo $estadisticas['total_ganado'] ?? 0; ?>
+                        </h4>
                         <p>Animales Registrados</p>
                     </div>
                 </div>
@@ -117,7 +126,9 @@ $titulo = APP_NAME;
                 <div class="card bg-info text-white">
                     <div class="card-body text-center">
                         <i class="fas fa-shopping-cart fa-2x mb-2"></i>
-                        <h4 id="total-ventas">-</h4>
+                        <h4 id="total-ventas">
+                            <?php echo $estadisticas['total_ventas'] ?? 0; ?>
+                        </h4>
                         <p>Ventas Realizadas</p>
                     </div>
                 </div>
@@ -126,7 +137,9 @@ $titulo = APP_NAME;
                 <div class="card bg-warning text-white">
                     <div class="card-body text-center">
                         <i class="fas fa-map-marker-alt fa-2x mb-2"></i>
-                        <h4 id="total-ubicaciones">-</h4>
+                        <h4 id="total-ubicaciones">
+                            <?php echo $estadisticas['total_ubicaciones'] ?? 0; ?>
+                        </h4>
                         <p>Ubicaciones</p>
                     </div>
                 </div>
@@ -137,7 +150,7 @@ $titulo = APP_NAME;
 
 <!-- Sección de Testimonios -->
 <section class="py-5">
-    <div class="container">
+    <div class="container bg-gradient rounded">
         <div class="row text-center mb-5">
             <div class="col">
                 <h2>Testimonios</h2>
@@ -190,38 +203,4 @@ $titulo = APP_NAME;
         </div>
     </div>
 </section>
-
-<script>
-    // Cargar estadísticas
-    //document.addEventListener('DOMContentLoaded', function() {
-        // Simular datos (en un sistema real estos vendrían de una API)
-    /*    document.getElementById('total-usuarios').textContent = '1 +';
-        document.getElementById('total-ganado').textContent = '2 +';
-        document.getElementById('total-ventas').textContent = '0 +';
-        document.getElementById('total-ubicaciones').textContent = '1 +';
-        document.getElementById('total-compras').textContent = '0 +';
-
-        // Simular carga de datos
-        setTimeout(function() {
-            document.getElementById('total-usuarios').textContent = '1,250 +';
-            document.getElementById('total-ganado').textContent = '3,800 +';
-            document.getElementById('total-ventas').textContent = '950 +';
-            document.getElementById('total-ubicaciones').textContent = '120 +';
-            document.getElementById('total-compras').textContent = '300 +';
-        }, 1000);
-       
-    });*/ 
-    // Cargar datos reales desde el servidor
-    fetch('obtener_estadisticas.php')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('total-usuarios').textContent = data.usuarios + ' 1+';
-            document.getElementById('total-ganado').textContent = data.ganado + ' 1+';
-            document.getElementById('total-ventas').textContent = data.ventas + ' 1+';
-            document.getElementById('total-ubicaciones').textContent = data.ubicaciones + ' 1+';
-        })
-        .catch(error => console.error('Error cargando estadísticas:', error));
-    
-</script>
-
 <?php include 'template/footer.php'; ?>

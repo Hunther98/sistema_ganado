@@ -1,6 +1,6 @@
 <?php
-require_once '../datos/dVenta.php';
-require_once '../datos/dGanado.php';
+require_once __DIR__ . '/../datos/dVenta.php';
+require_once __DIR__ . '/../datos/dGanado.php';
 
 class nVenta {
     

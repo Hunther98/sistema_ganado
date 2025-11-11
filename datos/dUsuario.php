@@ -59,16 +59,16 @@ class dUsuario {
         return $respuesta;
     }
     
-    // Función para iniciar sesión
-    function iniciarSesion($email, $password) {
+    // Función para iniciar sesión (acepta email o nombre)
+    function iniciarSesion($identificador, $password) {
         $cone = new dConexion();
         $usuario = null;
         
         try {
             $con = $cone->Conectar();
-            $sql = "SELECT * FROM usuarios WHERE email = ? AND activo = 1";
+            $sql = "SELECT * FROM usuarios WHERE (email = ? OR nombre = ?) AND activo = 1";
             $stmt = mysqli_prepare($con, $sql);
-            mysqli_stmt_bind_param($stmt, "s", $email);
+            mysqli_stmt_bind_param($stmt, "ss", $identificador, $identificador);
             mysqli_stmt_execute($stmt);
             
             $result = mysqli_stmt_get_result($stmt);
@@ -116,7 +116,7 @@ class dUsuario {
         
         try {
             $con = $cone->Conectar();
-            $sql = "SELECT id, nombre, apellido, email, telefono, direccion, tipo, fecha_registro FROM usuarios WHERE id = ? AND activo = 1";
+            $sql = "SELECT nombre, apellido, email, telefono, direccion, tipo, fecha_registro FROM usuarios WHERE id = ? AND (activo = 1 OR activo = 0)";
             $stmt = mysqli_prepare($con, $sql);
             mysqli_stmt_bind_param($stmt, "i", $id);
             mysqli_stmt_execute($stmt);
@@ -303,7 +303,7 @@ private function eliminarVacunacionesPorUsuario($con, $usuario_id) {
     // Eliminamos las vacunaciones de cada animal
     if (!empty($ganado_ids)) {
         $placeholders = implode(',', array_fill(0, count($ganado_ids), '?'));
-        $sql = "DELETE FROM vacunaciones WHERE ganado_id IN ($placeholders)";
+        $sql = "DELETE FROM vacunas WHERE ganado_id IN ($placeholders)";
         $stmt = mysqli_prepare($con, $sql);
         
         // Dinámicamente bindeamos los parámetros
@@ -330,8 +330,29 @@ private function eliminarVentasPorUsuario($con, $usuario_id) {
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 }
-    
-    // Getters y Setters
+    public function listarUsuarios($con) {
+        $usuarios = array();
+        $sql = "SELECT * FROM usuarios ORDER BY fecha_registro DESC";
+        $result = mysqli_query($con, $sql);
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $usuarios[] = $row;
+            }
+        }
+        return $usuarios;
+    }
+    function mostrarUsuarios() {
+        try {
+            $cone = new dConexion();
+            $con = $cone->Conectar();
+            $sql = "SELECT * FROM usuarios ORDER BY fecha_registro DESC";
+            $result = mysqli_query($con, $sql);
+            return $result;
+        } catch (Exception $exc) {
+            echo "Error al obtener usuarios: " . $exc->getMessage();
+        }
+        return null;
+    }
     public function getId() { return $this->id; }
     public function setId($id) { $this->id = $id; }
     
@@ -359,4 +380,5 @@ private function eliminarVentasPorUsuario($con, $usuario_id) {
     public function getActivo() { return $this->activo; }
     public function setActivo($activo) { $this->activo = $activo; }
 }
+
 ?>

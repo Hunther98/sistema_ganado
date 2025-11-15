@@ -85,7 +85,7 @@ $titulo = 'Mi Perfil';
                     <div class="mt-4">
                         <h5>Acciones de Cuenta</h5>
                         <div class="d-flex gap-2">
-                            <a href="cambiar_password.php" class="btn btn-outline-warning">Cambiar Contraseña</a>
+                            <a href="pRestablecer_Password.php" class="btn btn-outline-warning">Cambiar Contraseña</a>
                             <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalEliminarCuenta">
                                 Eliminar Cuenta
                             </button>

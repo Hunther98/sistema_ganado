@@ -1,6 +1,6 @@
 <?php
-require_once '../config/config.php';
-require_once '../negocio/nUsuario.php';
+require_once __DIR__ . '../../config/config.php';
+require_once __DIR__ . '../../negocio/nUsuario.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = $_POST['nombre'] ?? '';
@@ -23,11 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Si ya está autenticado, redirigir al inicio
-if (isset($_SESSION['usuario_id'])) {
-    header('Location: index.php');
-    exit;
-}
+$rootPath ='../'
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -51,6 +47,14 @@ if (isset($_SESSION['usuario_id'])) {
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
+        .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+
     </style>
 </head>
 <body>
@@ -104,6 +108,8 @@ if (isset($_SESSION['usuario_id'])) {
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="fas fa-lock"></i></span>
                                     <input type="password" class="form-control" id="password" name="password" required>
+                                    <span class="toggle-password" onclick="togglePassword()">👁️</span>
+
                                 </div>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -111,6 +117,8 @@ if (isset($_SESSION['usuario_id'])) {
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="fas fa-lock"></i></span>
                                     <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                                     <span class="toggle-password" onclick="toggleConfirmPassword()">👁️</span>
+
                                 </div>
                             </div>
                         </div>
@@ -138,7 +146,10 @@ if (isset($_SESSION['usuario_id'])) {
                                 <select class="form-select" id="tipo" name="tipo">
                                     <option value="comprador">Comprador</option>
                                     <option value="vendedor">Vendedor</option>
-                                    <option value="admin">Administrador</option>
+                                    <?Php if (verificarAutenticacion("admin")):?>
+                                        <option value="admin">Administrador</option>
+                                    <?php endif ?>
+                                    
                                 </select>
                             </div>
                             <div class="form-text">Selecciona "Vendedor" si deseas publicar ganado en venta.</div>
@@ -174,6 +185,17 @@ if (isset($_SESSION['usuario_id'])) {
             </div>
         </div>
     </div>
+    <script>
+        function togglePassword() {
+            const input = document.getElementById("password");
+            input.type = input.type === "password" ? "text" : "password";
+        }
+        function toggleConfirmPassword() {
+            const input = document.getElementById("confirmPassword");
+            input.type = input.type === "password" ? "text" : "password";
+        }
+    </script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

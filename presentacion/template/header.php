@@ -9,6 +9,7 @@ if (!isset($_SESSION['usuario_id']) && !in_array($pagina_actual, $paginas_public
     header('Location: pLogin.php');
     exit;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,14 +19,17 @@ if (!isset($_SESSION['usuario_id']) && !in_array($pagina_actual, $paginas_public
     <title><?php echo $titulo ?? APP_NAME; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <?php $rootPath = $rootPath ?? ''; ?>
-    <link rel="stylesheet" href="<?php echo $rootPath; ?>css/styles.css">
+    <link rel="stylesheet" href="<?php echo $rootPath; ?>../css/styles.css">
+    <link rel="stylesheet" href="../css/estilos.css">
 
     <style>
         body{
             font-family: Arial, sans-serif;
             margin: 0;
-            background: linear-gradient(to right, #127da0, #B721FF, #0837af);
+            background: linear-gradient(to right, #127da0, #096818ff, #a1d59bff);
             height: 100vh;
         }
     .navbar{
@@ -36,8 +40,25 @@ if (!isset($_SESSION['usuario_id']) && !in_array($pagina_actual, $paginas_public
             width: 100%;
             z-index: 1000;
         }
+        h1{  
+            font-size: 64px;
+            font-weight: bold;
+            text-transform: uppercase;
+            width: fit-content;
+            margin: 0 auto;
+            background: linear-gradient(to right, #55b7e5ff,#0837af, #09adeeff);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
         h2,h3{
-            color: black;
+             font-size: 48px;
+            font-weight: bold;
+            text-transform: uppercase;
+            width: fit-content;
+            margin: 0 auto;
+            background: linear-gradient(to right, #55b7e5ff,#0837af, #09adeeff);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .navbar-brand {
             font-weight: bold;
@@ -46,11 +67,11 @@ if (!isset($_SESSION['usuario_id']) && !in_array($pagina_actual, $paginas_public
             color: black;
             margin: 0px;
             text-align: center;
-            background: linear-gradient(to right, #127da0, #21deffff, #54abdbff);
+            /* background: linear-gradient(to right, #127da0, #21deffff, #54abdbff); */
 
         }
         .imagen-hero {
-            background-image: url('<?php echo $rootPath; ?>uploads/68b91dbf30aac_1756962239.jpeg');
+            /* background-image: url('<?php echo $rootPath; ?>uploads/68b91dbf30aac_1756962239.jpeg'); */
             background-size: cover;
             background-position: center;
             height: 60vh;
@@ -144,6 +165,10 @@ if (!isset($_SESSION['usuario_id']) && !in_array($pagina_actual, $paginas_public
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo $rootPath; ?>admin/listarReportesParametrizados.php">Reportes</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo $rootPath; ?>admin/aListarRol.php">lista de roles</a>
+
+                        </li>
 
                     <?php endif; ?>
                 </ul>
@@ -174,4 +199,4 @@ if (!isset($_SESSION['usuario_id']) && !in_array($pagina_actual, $paginas_public
     <!-- aside -->
 
     <!-- Contenido principal -->
-    <main class="scrollable-main  container-fluid" style="padding-top: 80px; padding-bottom: 80px;">
+    <main class=" container-fluid" style="padding-top: 80px; padding-bottom: 80px;">

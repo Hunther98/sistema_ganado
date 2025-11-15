@@ -192,7 +192,7 @@ $titulo = $accion == 'agregar' ? 'Publicar Ganado' : 'Editar Ganado';
     </div>
 </div>
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiHCfCjzf-C8A8ZaYPknAQEoJ_WYTxhhk&callback=initMap"></script>
 <script>
     let map;
     let marker;

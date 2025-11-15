@@ -33,7 +33,7 @@ $rootPath = '../';
             <?php foreach ($ganado as $animal): ?>
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="card h-100">
-                        <img src="../../uploads/<?php echo $animal['imagen']; ?>" class="card-img-top" alt="<?php echo $animal['nombre']; ?>" style="height: 200px; object-fit: cover;">
+                        <img src="../uploads/<?php echo $animal['imagen']; ?>" class="card-img-top" alt="<?php echo $animal['nombre']; ?>" style="height: 200px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $animal['nombre']; ?></h5>
                             <h6 class="text-primary">$<?php echo number_format($animal['precio'], 2); ?></h6>

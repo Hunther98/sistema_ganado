@@ -198,7 +198,7 @@ class dUsuario {
     
         try {
             $con = $cone->Conectar();
-            $sql = "DELETE FROM usuarios WHERE id = ?";
+            $sql = "UPDATE usuarios SET activo = 0 WHERE id = ?";
             $stmt = mysqli_prepare($con, $sql);
             mysqli_stmt_bind_param($stmt, "i", $id);
             
@@ -353,6 +353,387 @@ private function eliminarVentasPorUsuario($con, $usuario_id) {
         }
         return null;
     }
+    
+    public function obtenerTodosRol() {
+        $cone = new dConexion();
+        $roles = [];
+        
+        try {
+            $con = $cone->Conectar();
+            $query = "SELECT 
+                        r.id,
+                        r.nombre,
+                        r.descripcion,
+                        r.fecha_creacion,
+                        r.fecha_modificacion,
+                        COUNT(u.id) as total_usuarios
+                      FROM roles r
+                      LEFT JOIN usuarios u ON r.id = u.rol_id
+                      GROUP BY r.id, r.nombre, r.descripcion, r.fecha_creacion, r.fecha_modificacion
+                      ORDER BY r.nombre ASC";
+            
+            $result = mysqli_query($con, $query);
+            
+            if ($result) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $roles[] = $row;
+                }
+            }
+            
+            mysqli_close($con);
+        } catch (Exception $exc) {
+            error_log("Error al obtener roles: " . $exc->getMessage());
+        }
+        
+        return $roles;
+    }
+
+    public function obtenerPorIdRol($id) {
+        $cone = new dConexion();
+        $rol = null;
+        
+        try {
+            $con = $cone->Conectar();
+            $query = "SELECT * FROM roles WHERE id = ?";
+            $stmt = mysqli_prepare($con, $query);
+            mysqli_stmt_bind_param($stmt, "i", $id);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            
+            $rol = mysqli_fetch_assoc($result);
+            
+            mysqli_stmt_close($stmt);
+            mysqli_close($con);
+        } catch (Exception $e) {
+            error_log("Error al obtener rol: " . $e->getMessage());
+        }
+        
+        return $rol;
+    }
+
+    public function crearRol($nombre, $descripcion = null) {
+        $cone = new dConexion();
+        
+        try {
+            $con = $cone->Conectar();
+            
+            // Verificar si ya existe
+            if ($this->existePorNombreRol($nombre, $con)) {
+                mysqli_close($con);
+                return [
+                    'exito' => false,
+                    'mensaje' => 'Ya existe un rol con ese nombre'
+                ];
+            }
+
+            $query = "INSERT INTO roles (nombre, descripcion, fecha_creacion) 
+                      VALUES (?, ?, NOW())";
+            
+            $stmt = mysqli_prepare($con, $query);
+            mysqli_stmt_bind_param($stmt, "ss", $nombre, $descripcion);
+            
+            if (mysqli_stmt_execute($stmt)) {
+                $id = mysqli_insert_id($con);
+                mysqli_stmt_close($stmt);
+                mysqli_close($con);
+                
+                return [
+                    'exito' => true,
+                    'mensaje' => 'Rol creado exitosamente',
+                    'id' => $id
+                ];
+            } else {
+                mysqli_stmt_close($stmt);
+                mysqli_close($con);
+                
+                return [
+                    'exito' => false,
+                    'mensaje' => 'Error al crear el rol'
+                ];
+            }
+        } catch (Exception $e) {
+            if (isset($con)) {
+                mysqli_close($con);
+            }
+            return [
+                'exito' => false,
+                'mensaje' => $e->getMessage()
+            ];
+        }
+    }
+
+    public function actualizarRol($id, $nombre, $descripcion = null) {
+        $cone = new dConexion();
+        
+        try {
+            $con = $cone->Conectar();
+            
+            // Verificar que el rol existe
+            if (!$this->obtenerPorIdRol($id)) {
+                mysqli_close($con);
+                return [
+                    'exito' => false,
+                    'mensaje' => 'El rol no existe'
+                ];
+            }
+
+            // Verificar si el nombre ya existe en otro rol
+            $query = "SELECT id FROM roles WHERE LOWER(nombre) = LOWER(?) AND id != ?";
+            $stmt = mysqli_prepare($con, $query);
+            mysqli_stmt_bind_param($stmt, "si", $nombre, $id);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            
+            if (mysqli_fetch_assoc($result)) {
+                mysqli_stmt_close($stmt);
+                mysqli_close($con);
+                return [
+                    'exito' => false,
+                    'mensaje' => 'Ya existe otro rol con ese nombre'
+                ];
+            }
+            mysqli_stmt_close($stmt);
+
+            $query = "UPDATE roles 
+                      SET nombre = ?, 
+                          descripcion = ?, 
+                          fecha_modificacion = NOW() 
+                      WHERE id = ?";
+            
+            $stmt = mysqli_prepare($con, $query);
+            mysqli_stmt_bind_param($stmt, "ssi", $nombre, $descripcion, $id);
+            
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_close($stmt);
+                mysqli_close($con);
+                return [
+                    'exito' => true,
+                    'mensaje' => 'Rol actualizado exitosamente'
+                ];
+            } else {
+                mysqli_stmt_close($stmt);
+                mysqli_close($con);
+                return [
+                    'exito' => false,
+                    'mensaje' => 'Error al actualizar el rol'
+                ];
+            }
+        } catch (Exception $e) {
+            if (isset($con)) {
+                mysqli_close($con);
+            }
+            return [
+                'exito' => false,
+                'mensaje' => $e->getMessage()
+            ];
+        }
+    }
+
+    public function eliminarRol($id) {
+        $cone = new dConexion();
+        
+        try {
+            $con = $cone->Conectar();
+            
+            // Verificar que el rol existe
+            $rol = $this->obtenerPorIdRol($id);
+            if (!$rol) {
+                mysqli_close($con);
+                return [
+                    'exito' => false,
+                    'mensaje' => 'El rol no existe'
+                ];
+            }
+
+            // Verificar si hay usuarios asignados
+            $query = "SELECT COUNT(*) as total FROM usuarios WHERE rol_id = ?";
+            $stmt = mysqli_prepare($con, $query);
+            mysqli_stmt_bind_param($stmt, "i", $id);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $resultado = mysqli_fetch_assoc($result);
+            mysqli_stmt_close($stmt);
+
+            if ($resultado['total'] > 0) {
+                mysqli_close($con);
+                return [
+                    'exito' => false,
+                    'mensaje' => "No se puede eliminar el rol porque tiene {$resultado['total']} usuario(s) asignado(s)"
+                ];
+            }
+
+            $query = "DELETE FROM roles WHERE id = ?";
+            $stmt = mysqli_prepare($con, $query);
+            mysqli_stmt_bind_param($stmt, "i", $id);
+            
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_close($stmt);
+                mysqli_close($con);
+                return [
+                    'exito' => true,
+                    'mensaje' => 'Rol eliminado exitosamente'
+                ];
+            } else {
+                mysqli_stmt_close($stmt);
+                mysqli_close($con);
+                return [
+                    'exito' => false,
+                    'mensaje' => 'Error al eliminar el rol'
+                ];
+            }
+        } catch (Exception $e) {
+            if (isset($con)) {
+                mysqli_close($con);
+            }
+            return [
+                'exito' => false,
+                'mensaje' => $e->getMessage()
+            ];
+        }
+    }
+
+    private function existePorNombreRol($nombre, $con) {
+        $query = "SELECT COUNT(*) as total FROM roles WHERE LOWER(nombre) = LOWER(?)";
+        $stmt = mysqli_prepare($con, $query);
+        mysqli_stmt_bind_param($stmt, "s", $nombre);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $resultado = mysqli_fetch_assoc($result);
+        mysqli_stmt_close($stmt);
+        
+        return $resultado['total'] > 0;
+    }
+
+    public function obtenerEstadisticasRol() {
+        $cone = new dConexion();
+        $estadisticas = null;
+        
+        try {
+            $con = $cone->Conectar();
+            $query = "SELECT 
+                        COUNT(DISTINCT r.id) as total_roles,
+                        COUNT(u.id) as total_usuarios_con_rol,
+                        (SELECT COUNT(*) FROM usuarios WHERE rol_id IS NULL) as usuarios_sin_rol
+                      FROM roles r
+                      LEFT JOIN usuarios u ON r.id = u.rol_id";
+            
+            $result = mysqli_query($con, $query);
+            $estadisticas = mysqli_fetch_assoc($result);
+            
+            mysqli_close($con);
+        } catch (Exception $e) {
+            error_log("Error al obtener estadísticas: " . $e->getMessage());
+        }
+        
+        return $estadisticas;
+    }
+    
+    
+/**
+ * Asignar un rol a un usuario
+ */
+public function asignarRol($usuario_id, $rol_id) {
+    $cone = new dConexion();
+    $respuesta = false;
+    
+    try {
+        $con = $cone->Conectar();
+        
+        // Si rol_id es null, se quita el rol
+        if ($rol_id === null || $rol_id === '') {
+            $sql = "UPDATE usuarios SET rol_id = NULL WHERE id = ?";
+            $stmt = mysqli_prepare($con, $sql);
+            mysqli_stmt_bind_param($stmt, "i", $usuario_id);
+        } else {
+            // Verificar que el rol existe
+            $sqlVerificar = "SELECT id FROM roles WHERE id = ?";
+            $stmtVerificar = mysqli_prepare($con, $sqlVerificar);
+            mysqli_stmt_bind_param($stmtVerificar, "i", $rol_id);
+            mysqli_stmt_execute($stmtVerificar);
+            $resultVerificar = mysqli_stmt_get_result($stmtVerificar);
+            
+            if (!mysqli_fetch_assoc($resultVerificar)) {
+                mysqli_stmt_close($stmtVerificar);
+                mysqli_close($con);
+                return [
+                    'exito' => false,
+                    'mensaje' => 'El rol especificado no existe'
+                ];
+            }
+            mysqli_stmt_close($stmtVerificar);
+            
+            // Asignar el rol
+            $sql = "UPDATE usuarios SET rol_id = ? WHERE id = ?";
+            $stmt = mysqli_prepare($con, $sql);
+            mysqli_stmt_bind_param($stmt, "ii", $rol_id, $usuario_id);
+        }
+        
+        $respuesta = mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        mysqli_close($con);
+        
+        if ($respuesta) {
+            return [
+                'exito' => true,
+                'mensaje' => 'Rol asignado exitosamente'
+            ];
+        } else {
+            return [
+                'exito' => false,
+                'mensaje' => 'Error al asignar el rol'
+            ];
+        }
+        
+    } catch (Exception $exc) {
+        if (isset($con)) {
+            mysqli_close($con);
+        }
+        return [
+            'exito' => false,
+            'mensaje' => 'Error: ' . $exc->getMessage()
+        ];
+    }
+}
+
+/**
+ * Obtener usuarios con sus roles
+ */
+public function obtenerUsuariosConRoles() {
+    $cone = new dConexion();
+    $usuarios = [];
+    
+    try {
+        $con = $cone->Conectar();
+        $sql = "SELECT 
+                    u.id,
+                    u.nombre,
+                    u.apellido,
+                    u.email,
+                    u.telefono,
+                    u.tipo,
+                    u.activo,
+                    u.fecha_registro,
+                    r.id as rol_id,
+                    r.nombre as rol_nombre
+                FROM usuarios u
+                LEFT JOIN roles r ON u.rol_id = r.id
+                ORDER BY u.fecha_registro DESC";
+        
+        $result = mysqli_query($con, $sql);
+        
+        while ($row = mysqli_fetch_assoc($result)) {
+            $usuarios[] = $row;
+        }
+        
+        mysqli_free_result($result);
+        mysqli_close($con);
+    } catch (Exception $exc) {
+        echo "Error al obtener usuarios con roles: " . $exc->getMessage();
+    }
+    
+    return $usuarios;
+}
+    
     public function getId() { return $this->id; }
     public function setId($id) { $this->id = $id; }
     

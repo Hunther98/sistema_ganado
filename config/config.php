@@ -3,7 +3,7 @@
 define('APP_NAME', 'Sistema de Venta de Ganado');
 define('APP_VERSION', '1.0.0');
 // Ajusta el APP_URL según tu entorno (XAMPP normalmente usa http://localhost/<carpeta>)
-define('APP_URL', 'http://sistema_ganado_septiembre');
+define('APP_URL', 'http://localhost//sistema_ganado_septiembre');
 
 // Configuración de la base de datos
 define('DB_HOST', 'localhost');

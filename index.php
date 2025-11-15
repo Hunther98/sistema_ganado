@@ -1,11 +1,11 @@
 <?php
-require_once '../config/config.php';
+require_once 'config/config.php';
 verificarAutenticacion();
 $titulo = APP_NAME;
 $estadisticas = obtenerEstadisticasGenerales();
 
 ?>
-<?php include 'template/header.php'; ?>
+<?php include 'presentacion/template/header.php'; ?>
 
 <!-- como ver que usuario ha iniciado sesion en la pagina y su nombre -->
  

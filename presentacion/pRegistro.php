@@ -30,7 +30,7 @@ $rootPath ='../'
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrarse - <?php echo APP_NAME; ?></title>
+    <title>Registrar usuario - <?php echo APP_NAME; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -156,7 +156,7 @@ $rootPath ='../'
                         </div>
                         
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary btn-lg">Registrarse</button>
+                            <button type="submit" class="btn btn-primary btn-lg">Registrar usuario</button>
                         </div>
                     </form>
                     

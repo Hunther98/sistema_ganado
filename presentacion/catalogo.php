@@ -2,6 +2,7 @@
 require_once '../config/config.php';
 require_once '../negocio/nGanado.php';
 require_once '../utilidades/api.php'; // ← AÑADIR ESTA LÍNEA
+include 'template/header.php'; 
 
 $nGanado = new nGanado();
 $filtros = [];
@@ -17,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 $ganado = $nGanado->obtenerTodos($filtros);
 $razas = $nGanado->obtenerRazas();
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -46,7 +48,7 @@ $razas = $nGanado->obtenerRazas();
     </style>
 </head>
 <body>
-    <?php include 'template/header.php'; ?>
+    
     
     <div class="container py-4">
         <div class="row mb-4">

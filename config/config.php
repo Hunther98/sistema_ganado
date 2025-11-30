@@ -2,7 +2,7 @@
 // Configuración de la aplicación
 define('APP_NAME', 'Sistema de Venta de Ganado');
 define('APP_VERSION', '1.0.0');
-// Ajusta el APP_URL según tu entorno (XAMPP normalmente usa http://localhost/<carpeta>)
+// Ajusta el APP_URL según entorno (XAMPP normalmente usa http://localhost/<carpeta>)
 define('APP_URL', 'http://localhost//sistema_ganado_septiembre');
 
 // Configuración de la base de datos
@@ -21,27 +21,27 @@ define('ALLOWED_IMAGE_TYPES', ['jpg', 'jpeg', 'png', 'gif']);
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-// Cerrar sesión si está vacía
-if (empty($_SESSION)) {
-    session_destroy();
-}
-if (!empty($_SESSION)) {
-    // Regenerar ID de sesión para mayor seguridad
-    session_regenerate_id(true);
-}
-if (isset($_SESSION['ultimo_acceso'])) {
-    $inactividad = 1800; // 30 minutos
-    if (time() - $_SESSION['ultimo_acceso'] > $inactividad) {
-        // Tiempo de inactividad excedido, destruir sesión
-        session_unset();
-        session_destroy();
-        header('Location: ' . APP_URL . '/presentacion/pLogin.php?mensaje=sesion_expirada');
-        exit;
-    }
-}
-if (isset($_SESSION['usuario_id'])) {
-    $_SESSION['ultimo_acceso'] = time(); // Actualizar tiempo de último acceso
-}
+// // Cerrar sesión si está vacía
+// if (empty($_SESSION)) {
+//     session_destroy();
+// }
+// if (!empty($_SESSION)) {
+//     // Regenerar ID de sesión para mayor seguridad
+//     session_regenerate_id(true);
+// }
+// if (isset($_SESSION['ultimo_acceso'])) {
+//     $inactividad = 1800; // 30 minutos
+//     if (time() - $_SESSION['ultimo_acceso'] > $inactividad) {
+//         // Tiempo de inactividad excedido, destruir sesión
+//         session_unset();
+//         session_destroy();
+//         header('Location: ' . APP_URL . '/presentacion/pLogin.php?mensaje=sesion_expirada');
+//         exit;
+//     }
+// }
+// if (isset($_SESSION['usuario_id'])) {
+//     $_SESSION['ultimo_acceso'] = time(); // Actualizar tiempo de último acceso
+// }
 
 // Función para verificar autenticación
 function verificarAutenticacion($tipoRequerido = null) {

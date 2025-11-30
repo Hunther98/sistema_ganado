@@ -1,14 +1,18 @@
 <?php
-require_once 'config/config.php';
+require_once __DIR__.'/../config/config.php';
 verificarAutenticacion();
 $titulo = APP_NAME;
 $estadisticas = obtenerEstadisticasGenerales();
 
 ?>
-<?php include 'presentacion/template/header.php'; ?>
+<?php include 'template/header.php'; ?>
 
 <!-- como ver que usuario ha iniciado sesion en la pagina y su nombre -->
- 
+<?php if (isset($_SESSION['usuario_id'])): ?>
+    <div class="alert alert-info">
+        <strong>Bienvenido:</strong> <?php echo htmlspecialchars($_SESSION['usuario_nombre'] ?? 'Usuario'); ?>
+    </div>
+<?php endif; ?>
 <!-- Sección Hero -->
 <section class="hero-section imagen-hero ">
     <div class="container">
@@ -203,4 +207,32 @@ $estadisticas = obtenerEstadisticasGenerales();
         </div>
     </div>
 </section>
+<script>
+    // Ejemplo de animación simple para las estadísticas
+    document.addEventListener('DOMContentLoaded', function() {
+        const estadisticas = ['total-usuarios', 'total-ganado', 'total-ventas', 'total-ubicaciones'];
+        estadisticas.forEach(id => {
+            const elemento = document.getElementById(id);
+            let count = 0;
+            const target = parseInt(elemento.textContent, 10);
+            const increment = Math.ceil(target / 100);
+            const interval = setInterval(() => {
+                count += increment;
+                if (count >= target) {
+                    elemento.textContent = target;
+                    clearInterval(interval);
+                } else {
+                    elemento.textContent = count;
+                }
+            }, 20);
+        });
+    });
+    setTimeout(function() {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(function(alert) {
+                const bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            });
+        }, 5000);
+</script>
 <?php include 'template/footer.php'; ?>

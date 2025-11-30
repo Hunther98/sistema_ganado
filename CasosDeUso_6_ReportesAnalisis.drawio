@@ -1,0 +1,97 @@
+<mxfile host="Electron" modified="2025-11-23T12:00:00.000Z" agent="Mozilla/5.0" etag="hash" version="24.0.0" type="device">
+  <diagram name="Caso de Uso: Reportes y Análisis" id="use-case-diagram">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- Actores -->
+        <mxCell id="actor-usuario" value="Usuario" style="shape=umlActor;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="250" width="40" height="120" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="actor-admin" value="Administrador" style="shape=umlActor;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="550" width="40" height="120" as="geometry"/>
+        </mxCell>
+        
+        <!-- Sistema -->
+        <mxCell id="sistema" value="Reportes y Análisis" style="shape=ellipse;aspect=fixed;fillColor=none;strokeColor:#000000;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="300" y="200" width="450" height="550" as="geometry"/>
+        </mxCell>
+        
+        <!-- Casos de Uso -->
+        <mxCell id="uc-estadisticas" value="Ver Estadísticas Generales" style="ellipse;whiteSpace:wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="230" width="140" height="60" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-mis-estadisticas" value="Ver Mis Estadísticas" style="ellipse;whiteSpace:wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="330" width="140" height="60" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-reportes-pdf" value="Descargar Reportes PDF" style="ellipse;whiteSpace:wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="230" width="140" height="60" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-reportes-param" value="Listar Reportes Parametrizados" style="ellipse;whiteSpace:wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="330" width="140" height="60" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-ventas-usuario" value="Reportes de Ventas por Usuario" style="ellipse;whiteSpace:wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="430" width="140" height="60" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-ganado-estado" value="Reporte de Ganado por Estado" style="ellipse;whiteSpace:wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="530" width="140" height="60" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-exportar" value="Exportar Datos" style="ellipse;whiteSpace:wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="430" width="140" height="60" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-graficos" value="Ver Gráficos Estadísticos" style="ellipse;whiteSpace:wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="530" width="140" height="60" as="geometry"/>
+        </mxCell>
+        
+        <!-- Asociaciones Usuario -->
+        <mxCell id="line1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="actor-usuario" target="uc-estadisticas">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="line2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="actor-usuario" target="uc-mis-estadisticas">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="line3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="actor-usuario" target="uc-exportar">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Asociaciones Admin -->
+        <mxCell id="line4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="actor-admin" target="uc-reportes-pdf">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="line5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="actor-admin" target="uc-reportes-param">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="line6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="actor-admin" target="uc-ventas-usuario">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="line7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="actor-admin" target="uc-ganado-estado">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="line8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="actor-admin" target="uc-graficos">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Relaciones -->
+        <mxCell id="line9" value="&lt;&lt;include&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="uc-mis-estadisticas" target="uc-graficos">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

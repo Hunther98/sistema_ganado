@@ -237,7 +237,30 @@ public function obtenerCompletoPorId($id) {
     
     return $usuario;
 }
-
+public function obtenerUsuariosRecientes($limite = 5) {
+    $cone = new dConexion();
+    $usuarios = [];
+    
+    try {
+        $con = $cone->Conectar();
+        $sql = "SELECT id, nombre, apellido, email, telefono, direccion, tipo, activo, fecha_registro FROM usuarios ORDER BY fecha_registro DESC LIMIT ?";
+        $stmt = mysqli_prepare($con, $sql);
+        mysqli_stmt_bind_param($stmt, "i", $limite);
+        mysqli_stmt_execute($stmt);
+        
+        $result = mysqli_stmt_get_result($stmt);
+        while ($row = mysqli_fetch_assoc($result)) {
+            $usuarios[] = $row;
+        }
+        
+        mysqli_stmt_close($stmt);
+        mysqli_close($con);
+    } catch (Exception $exc) {
+        echo "Error al obtener usuarios recientes: " . $exc->getMessage();
+    }
+    
+    return $usuarios;
+}
 // La función eliminar ya debería existir, pero la mejoramos:
 public function eliminarCuenta($id) {
     $cone = new dConexion();

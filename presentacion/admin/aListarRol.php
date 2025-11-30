@@ -17,6 +17,8 @@ $roles = $nAsignarRol->obtenerTodosRoles();
 $mensaje = isset($_SESSION['mensaje']) ? $_SESSION['mensaje'] : null;
 $tipo_mensaje = isset($_SESSION['tipo_mensaje']) ? $_SESSION['tipo_mensaje'] : null;
 unset($_SESSION['mensaje'], $_SESSION['tipo_mensaje']);
+method_exists($nAsignarRol, 'asignarRol');
+
 ?>
 
 <!DOCTYPE html>
@@ -209,7 +211,7 @@ unset($_SESSION['mensaje'], $_SESSION['tipo_mensaje']);
             <?php endif; ?>
         </div>
 
-        <button class="back-button" onclick="window.location.href='dashboard.php'" title="Volver al Dashboard">
+        <button class="back-button" onclick="window.location.href='admin.php'" title="Volver al Dashboard">
             <i class="fas fa-arrow-left"></i>
         </button>
     </div>

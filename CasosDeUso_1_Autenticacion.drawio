@@ -1,0 +1,60 @@
+<mxfile host="Electron" modified="2025-11-23T12:00:00.000Z" agent="Mozilla/5.0" etag="hash" version="24.0.0" type="device">
+  <diagram name="Caso de Uso: Autenticación" id="use-case-diagram">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- Actor -->
+        <mxCell id="actor-usuario" value="Usuario" style="shape=umlActor;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="100" y="400" width="40" height="120" as="geometry"/>
+        </mxCell>
+        
+        <!-- Sistema -->
+        <mxCell id="sistema" value="Sistema de Venta de Ganado" style="shape=ellipse;aspect=fixed;fillColor=none;strokeColor=#000000;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="350" y="300" width="400" height="400" as="geometry"/>
+        </mxCell>
+        
+        <!-- Casos de Uso -->
+        <mxCell id="uc-registrar" value="Registrar Usuario" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="330" width="140" height="60" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-login" value="Iniciar Sesión" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="420" width="140" height="60" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-logout" value="Cerrar Sesión" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="510" width="140" height="60" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-validar" value="Validar Datos" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="430" y="600" width="140" height="60" as="geometry"/>
+        </mxCell>
+        
+        <!-- Asociaciones -->
+        <mxCell id="line1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="actor-usuario" target="uc-registrar">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="line2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="actor-usuario" target="uc-login">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="line3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="actor-usuario" target="uc-logout">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Inclusión -->
+        <mxCell id="line4" value="&lt;&lt;include&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="uc-registrar" target="uc-validar">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="line5" value="&lt;&lt;include&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="uc-login" target="uc-validar">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -116,8 +116,8 @@ $razas = $nGanado->obtenerRazas();
                 <?php foreach ($ganado as $animal): ?>
                     <div class="col-md-6 col-lg-4 mb-4">
                         <div class="card h-100">
-                            <img src="../uploads/<?php echo $animal['imagen']; ?>" class="card-img-top" ...>
-                            <!--<img src="../uploads<?php echo $animal['imagen']; ?>" class="card-img-top" alt="<?php echo $animal['nombre']; ?>">>-->
+                            <!-- <img src="../uploads/<?php echo $animal['imagen']; ?>" class="card-img-top" ...> -->
+                            <img src="uploads/<?php echo $animal['imagen']; ?>" class="card-img-top" alt="<?php echo $animal['nombre']; ?>">>
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $animal['nombre']; ?></h5>
                                 <h6 class="text-primary">$<?php echo number_format($animal['precio'], 2); ?></h6>
@@ -212,7 +212,7 @@ $razas = $nGanado->obtenerRazas();
     <?php include 'template/footer.php'; ?>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&callback=initMaps"></script>-->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiHCfCjzf-C8A8ZaYPknAQEoJ_WYTxhhk&callback=initMaps"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initPano&v=weekly"></script>
     <script>
         // Inicializar todos los mapas

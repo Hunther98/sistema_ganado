@@ -70,7 +70,7 @@ class dVacunacion {
             mysqli_stmt_close($stmt);
             mysqli_close($con);
         } catch (Exception $exc) {
-            echo "Error al obtener vacunaciones: " . $exc->getMessage();
+            echo "Error al obtener vacunaciones por ganado : " . $exc->getMessage();
         }
         
         return $vacunaciones;
@@ -79,11 +79,11 @@ class dVacunacion {
     // Función para obtener vacunación por ID
     function obtenerPorId($id) {
         $cone = new dConexion();
-        $vacunacion = null;
+        $vacunacion = [];
         
         try {
             $con = $cone->Conectar();
-            $sql = "SELECT * FROM vacunas WHERE id = ?";
+            $sql = "SELECT * FROM vacunaciones WHERE id = ?";
             $stmt = mysqli_prepare($con, $sql);
             mysqli_stmt_bind_param($stmt, "i", $id);
             mysqli_stmt_execute($stmt);
@@ -96,7 +96,7 @@ class dVacunacion {
             mysqli_stmt_close($stmt);
             mysqli_close($con);
         } catch (Exception $exc) {
-            echo "Error al obtener vacunación: " . $exc->getMessage();
+            echo "Error al obtener vacunación por id : " . $exc->getMessage();
         }
         
         return $vacunacion;

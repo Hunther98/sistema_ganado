@@ -134,6 +134,7 @@ if (!isset($_SESSION['usuario_id']) && !in_array($pagina_actual, $paginas_public
                         <a class="nav-link" href="<?php echo $rootPath; ?>catalogo.php">Catálogo</a>
                     </li>
                     <?php if (isset($_SESSION['usuario_id'])): ?>
+                        <!-- solo para vendedores -->
                         <?php if ($_SESSION['usuario_tipo'] == 'vendedor'): ?>
                             
                             <li class="nav-item">
@@ -146,6 +147,7 @@ if (!isset($_SESSION['usuario_id']) && !in_array($pagina_actual, $paginas_public
                                 <a class="nav-link" href="<?php echo $rootPath; ?>mis_ventas.php">Mis Ventas</a>
                             </li>
                         <?php endif; ?>
+                        <!-- solo para compradores -->
                         <?php if ($_SESSION['usuario_tipo'] == 'comprador'): ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo $rootPath; ?>mis_compras.php">Mis Compras</a>
@@ -155,6 +157,7 @@ if (!isset($_SESSION['usuario_id']) && !in_array($pagina_actual, $paginas_public
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo $rootPath; ?>pContacto.php">Contacto</a>
                     </li>
+                    <!-- solo para admin -->
                     <?php if (isset($_SESSION['usuario_id']) && $_SESSION['usuario_tipo'] == 'admin'): ?>
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo $rootPath; ?>admin/admin.php">Panel Admin</a>

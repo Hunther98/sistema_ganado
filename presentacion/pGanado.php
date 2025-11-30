@@ -150,7 +150,7 @@ $titulo = $accion == 'agregar' ? 'Publicar Ganado' : 'Editar Ganado';
                                    <?php echo ($accion == 'agregar') ? 'required' : ''; ?>>
                             <?php if ($accion == 'editar' && !empty($ganado['imagen'])): ?>
                                 <div class="mt-2">
-                                    <img src="../uploads/<?php echo $ganado['imagen']; ?>" alt="Imagen actual" class="img-thumbnail" style="max-height: 200px;">
+                                    <img src="uploads/<?php echo $ganado['imagen']; ?>" alt="Imagen actual" class="img-thumbnail" style="max-height: 700px;">
                                 </div>
                             <?php endif; ?>
                         </div>

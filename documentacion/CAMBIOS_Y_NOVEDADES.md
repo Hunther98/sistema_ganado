@@ -154,7 +154,7 @@ Accentos:         #ffc107, #dc3545
 - Teléfonos (7-15 dígitos)
 - Números (enteros y flotantes)
 - Nombres (solo caracteres válidos)
-- URLs
+-- URLs
 - Fechas
 - Contraseñas fuertes
 - Archivos e imágenes

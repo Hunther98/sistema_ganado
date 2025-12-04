@@ -21,28 +21,6 @@ define('ALLOWED_IMAGE_TYPES', ['jpg', 'jpeg', 'png', 'gif']);
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-// // Cerrar sesión si está vacía
-// if (empty($_SESSION)) {
-//     session_destroy();
-// }
-// if (!empty($_SESSION)) {
-//     // Regenerar ID de sesión para mayor seguridad
-//     session_regenerate_id(true);
-// }
-// if (isset($_SESSION['ultimo_acceso'])) {
-//     $inactividad = 1800; // 30 minutos
-//     if (time() - $_SESSION['ultimo_acceso'] > $inactividad) {
-//         // Tiempo de inactividad excedido, destruir sesión
-//         session_unset();
-//         session_destroy();
-//         header('Location: ' . APP_URL . '/presentacion/pLogin.php?mensaje=sesion_expirada');
-//         exit;
-//     }
-// }
-// if (isset($_SESSION['usuario_id'])) {
-//     $_SESSION['ultimo_acceso'] = time(); // Actualizar tiempo de último acceso
-// }
-
 // Función para verificar autenticación
 function verificarAutenticacion($tipoRequerido = null) {
     if (!isset($_SESSION['usuario_id'])) {

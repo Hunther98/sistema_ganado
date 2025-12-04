@@ -396,11 +396,14 @@ $usuario_id = obtenerUsuarioId();
                         <li><a href="<?php echo $rootPath; ?>pGanado.php?accion=agregar" class="nav-link">
                             <i class="fas fa-plus"></i> Publicar Ganado
                         </a></li>
-                        <li><a href="<?php echo $rootPath; ?>admin/listar_ganado.php" class="nav-link">
+                        <li><a href="<?php echo $rootPath; ?>listar_ganado.php" class="nav-link">
                             <i class="fas fa-list"></i> Mis Animales
                         </a></li>
                         <li><a href="<?php echo $rootPath; ?>mis_ventas.php" class="nav-link">
                             <i class="fas fa-chart-line"></i> Mis Ventas
+                        </a></li>
+                        <li><a href="<?php echo $rootPath; ?>pVacunacion.php?ganado_id=<?php echo $ganado['id']; ?>"class="nav-link">
+                            <i class="fas fa-syringe"></i> Agregar Vacunación
                         </a></li>
                     </ul>
                 </li>
@@ -421,7 +424,7 @@ $usuario_id = obtenerUsuarioId();
                 <li class="nav-item">
                     <a href="#adminMenu" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         <i class="fas fa-shield-alt"></i>
-                        <span>Administración</span>
+                        <span>Acceso y seguridad</span>
                         <i class="fas fa-chevron-right ms-auto" style="font-size: 0.75rem;"></i>
                     </a>
                     <ul class="nav-submenu" id="adminMenu">
@@ -429,10 +432,10 @@ $usuario_id = obtenerUsuarioId();
                             <i class="fas fa-tachometer-alt"></i> Panel Admin
                         </a></li>
                         <li><a href="<?php echo $rootPath; ?>admin/listar_usuario.php" class="nav-link">
-                            <i class="fas fa-users"></i> Gestionar Usuarios
+                            <i class="fas fa-users"></i> Administrar Usuarios
                         </a></li>
                         <li><a href="<?php echo $rootPath; ?>admin/aListarRol.php" class="nav-link">
-                            <i class="fas fa-key"></i> Roles
+                            <i class="fas fa-key"></i>Administrar Roles
                         </a></li>
                         <li><a href="<?php echo $rootPath; ?>admin/listarReportesParametrizados.php" class="nav-link">
                             <i class="fas fa-file-pdf"></i> Reportes
@@ -440,6 +443,7 @@ $usuario_id = obtenerUsuarioId();
                         <li><a href="<?php echo $rootPath; ?>admin/ver_tablas.php" class="nav-link">
                             <i class="fas fa-database"></i> Ver Tablas
                         </a></li>
+                        <li><a href="#" class="nav-link"><i class="fas fa-shield-alt"></i>Acceso y seguridad</a></li>
                     </ul>
                 </li>
             <?php endif; ?>

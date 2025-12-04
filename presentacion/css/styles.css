@@ -13,7 +13,7 @@
             width: 100%;
             z-index: 1000;
         }
-        h1{  
+        /* h1{  
             font-size: 64px;
             font-weight: bold;
             text-transform: uppercase;
@@ -22,7 +22,7 @@
             background: linear-gradient(to right, #55b7e5ff,#0837af, #09adeeff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
+        } */
         h2,h3{
              font-size: 48px;
             font-weight: bold;

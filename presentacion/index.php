@@ -39,11 +39,11 @@ $estadisticas = obtenerEstadisticasGenerales();
             <div class="col-lg-6 px-5 order-lg-1 order-2">
                 <div class="fade-in">
                     <h1 class="display-3 fw-bold mb-4">
-                        <i class="fas fa-cow me-3 text-primary"></i>
+                        <i class=" me-3 text-primary"></i>
                         <?php echo APP_NAME; ?>
                     </h1>
                     <p class="lead fs-5 mb-4 text-muted" style="max-width: 500px;">
-                        🐄 La plataforma número uno para comprar y vender ganado de calidad en toda la región
+                         La plataforma número uno para comprar y vender ganado de calidad en toda la región
                     </p>
                     
                     <!-- CTA Principal -->

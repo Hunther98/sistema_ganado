@@ -214,8 +214,8 @@ $razas = $nGanado->obtenerRazas();
     <?php include 'template/footer.php'; ?>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiHCfCjzf-C8A8ZaYPknAQEoJ_WYTxhhk&callback=initMaps"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initPano&v=weekly"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMaps"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=artNGg&callback=initPano&v=weekly"></script>
     <script>
         // Inicializar todos los mapas
         function initMaps() {

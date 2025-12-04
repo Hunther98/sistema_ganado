@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../../config/config.php';
-require_once __DIR__ . '/../../negocio/nGanado.php';
+include '../config/config.php';
+include '../negocio/nGanado.php';
 
 verificarAutenticacion('vendedor');
 
@@ -8,9 +8,8 @@ $nGanado = new nGanado();
 $ganado = $nGanado->obtenerPorUsuario($_SESSION['usuario_id']);
 
 $titulo = 'Mis Animales';
-$rootPath = '../';
 ?>
-<?php include __DIR__ . '/../template/header.php'; ?>
+<?php include './template/header.php'; ?>
 
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -33,7 +32,7 @@ $rootPath = '../';
             <?php foreach ($ganado as $animal): ?>
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="card h-100">
-                        <img src="../uploads/<?php echo $animal['imagen']; ?>" class="card-img-top" alt="<?php echo $animal['nombre']; ?>" style="height: 200px; object-fit: cover;">
+                        <img src="./uploads/<?php echo $animal['imagen']; ?>" class="card-img-top" alt="<?php echo $animal['nombre']; ?>" style="height: 200px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $animal['nombre']; ?></h5>
                             <h6 class="text-primary">$<?php echo number_format($animal['precio'], 2); ?></h6>
@@ -61,11 +60,11 @@ $rootPath = '../';
                             <p class="card-text small"><?php echo substr($animal['descripcion'], 0, 100); ?>...</p>
                             
                             <div class="d-flex justify-content-between">
-                                <a href="detalle_ganado.php?id=<?php echo $animal['id']; ?>" class="btn btn-sm btn-outline-primary">
+                                <a href="./detalle_ganado.php?id=<?php echo $animal['id']; ?>" class="btn btn-sm btn-outline-primary">
                                     <i class="fas fa-eye"></i> Ver
                                 </a>
                                 <?php if ($animal['estado'] == 'disponible'): ?>
-                                    <a href="../pGanado.php?accion=editar&id=<?php echo $animal['id']; ?>" class="btn btn-sm btn-outline-warning">
+                                    <a href="./pGanado.php?accion=editar&id=<?php echo $animal['id']; ?>" class="btn btn-sm btn-outline-warning">
                                         <i class="fas fa-edit"></i> Editar
                                     </a>
                                 <?php endif; ?>
@@ -93,4 +92,4 @@ $rootPath = '../';
     </div>
 </div>
 
-<?php include __DIR__ . '/../template/footer.php'; ?>
+<?php include __DIR__ . './template/footer.php'; ?>

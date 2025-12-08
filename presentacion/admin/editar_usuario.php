@@ -52,7 +52,7 @@ $rootPath = '../';
 ?>
 <?php include __DIR__ . '/../template/header.php'; ?>
 
-<div class="scrollable-card">
+<div class="container-card">
     <?php if (isset($_GET['success'])): ?>
         <div class="alert alert-success">
             <?php echo $_GET['success']; ?>
@@ -72,7 +72,7 @@ $rootPath = '../';
     </nav>
 
     <div class="row">
-        <div class="col-md-8 mx-auto">
+        <div class="col-md-4 mx-auto">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Editar Usuario</h3>
@@ -89,7 +89,7 @@ $rootPath = '../';
                     <form method="POST" action="">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="nombre" class="form-label">Nombre *</label>
+                                <label for="nombre" class="form-label">Nombre <label class="bg-alert">*</label></label>
                                 <input type="text" class="form-control" id="nombre" name="nombre" 
                                        value="<?php echo htmlspecialchars($usuario['nombre']); ?>" required>
                             </div>

@@ -169,7 +169,10 @@ public function obtenerUsuarioPorId($id){
     $dUsuario = new dUsuario();
     return $dUsuario->obtenerPorId($id);
 }
-
+public function obtenerUsuariosRecientes() {
+    $dUsuario = new dUsuario();
+    return $dUsuario->obtenerUsuariosRecientes();
+}
 // Función para cerrar sesión
 public function cerrarSesion() {
     session_start();

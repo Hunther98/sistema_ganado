@@ -146,7 +146,7 @@ class dVenta {
     // Función para obtener venta por ID
     function obtenerPorId($id) {
         $cone = new dConexion();
-        $venta = null;
+        $venta =[];
         
         try {
             $con = $cone->Conectar();

@@ -39,8 +39,8 @@ class dGanado {
         
         try {
             $con = $cone->Conectar();
-            // $sql = "INSERT INTO ganado (usuario_id, nombre, descripcion, raza, edad, peso, precio, imagen, ubicacion, latitud, longitud) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $sql = "CALL sp_registrar_usuario(?, ?, ?, ?, ?, ?, ?, @usuario_id)";
+            $sql = "INSERT INTO ganado (usuario_id, nombre, descripcion, raza, edad, peso, precio, imagen, ubicacion, latitud, longitud) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            // $sql = "CALL sp_registrar_usuario(?, ?, ?, ?, ?, ?, ?, @usuario_id)";
 
             $stmt = mysqli_prepare($con, $sql);
             mysqli_stmt_bind_param($stmt, "isssiddssdd", 
@@ -231,8 +231,8 @@ class dGanado {
         
         try {
             $con = $cone->Conectar();
-            // $sql = "UPDATE ganado SET nombre = ?, descripcion = ?, raza = ?, edad = ?, peso = ?, precio = ?, imagen = ?, ubicacion = ?, latitud = ?, longitud = ? WHERE id = ? AND usuario_id = ?";
-            $sql = "CALL sp_actualizar_usuario(?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "UPDATE ganado SET nombre = ?, descripcion = ?, raza = ?, edad = ?, peso = ?, precio = ?, imagen = ?, ubicacion = ?, latitud = ?, longitud = ? WHERE id = ? AND usuario_id = ?";
+            // $sql = "CALL sp_actualizar_usuario(?, ?, ?, ?, ?, ?, ?, ?)";
 
             $stmt = mysqli_prepare($con, $sql);
             mysqli_stmt_bind_param($stmt, "sssiddssddii", 
@@ -267,8 +267,8 @@ class dGanado {
         
         try {
             $con = $cone->Conectar();
-            // $sql = "DELETE FROM ganado WHERE id = ? AND usuario_id = ?";
-            $sql = "CALL sp_eliminar_usuario_logico(?, ?, ?)";
+            $sql = "DELETE FROM ganado WHERE id = ? AND usuario_id = ?";
+            // $sql = "CALL sp_eliminar_usuario_logico(?, ?, ?)";
 
             $stmt = mysqli_prepare($con, $sql);
             mysqli_stmt_bind_param($stmt, "ii", $id, $usuario_id);

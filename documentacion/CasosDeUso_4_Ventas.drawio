@@ -1,0 +1,72 @@
+<mxfile host="Electron" modified="2025-11-23T12:00:00.000Z" agent="Mozilla/5.0" etag="hash" version="24.0.0" type="device">
+  <diagram name="Caso de Uso: Ventas" id="use-case-diagram">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- Actor -->
+        <mxCell id="actor-vendedor" value="Vendedor" style="shape=umlActor;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="300" width="40" height="120" as="geometry"/>
+        </mxCell>
+        
+        <!-- Sistema -->
+        <mxCell id="sistema" value="Gestión de Ventas" style="shape=ellipse;aspect=fixed;fillColor=none;strokeColor:#000000;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="300" y="250" width="450" height="450" as="geometry"/>
+        </mxCell>
+        
+        <!-- Casos de Uso -->
+        <mxCell id="uc-recibir" value="Recibir Solicitud de Compra" style="ellipse;whiteSpace:wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="280" width="140" height="60" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-confirmar" value="Confirmar Venta" style="ellipse;whiteSpace:wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="380" width="140" height="60" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-cancelar" value="Cancelar Venta" style="ellipse;whiteSpace:wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="480" width="140" height="60" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-mis-ventas" value="Ver Mis Ventas" style="ellipse;whiteSpace:wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="280" width="140" height="60" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-estado" value="Ver Estado de Ventas" style="ellipse;whiteSpace:wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="380" width="140" height="60" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-comision" value="Generar Reporte de Comisiones" style="ellipse;whiteSpace:wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="480" width="140" height="60" as="geometry"/>
+        </mxCell>
+        
+        <!-- Asociaciones -->
+        <mxCell id="line1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="actor-vendedor" target="uc-recibir">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="line2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="actor-vendedor" target="uc-confirmar">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="line3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="actor-vendedor" target="uc-cancelar">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="line4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="actor-vendedor" target="uc-mis-ventas">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="line5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="actor-vendedor" target="uc-comision">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Relaciones -->
+        <mxCell id="line6" value="&lt;&lt;extend&gt;&gt;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="uc-mis-ventas" target="uc-estado">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

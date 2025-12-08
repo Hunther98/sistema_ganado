@@ -47,7 +47,7 @@ class ApiManager {
     }
     
     $apiKey = self::getApiKey('google_maps');
-    if (empty($apiKey) || $apiKey === 'TU_API_KEY_REAL_AQUI') {
+    if (empty($apiKey) || $apiKey === 'AIzaSyDiHCfCjzf-C8A8ZaYPknAQEoJ_WYTxhhk') {
         error_log("API Key de Google Maps no configurada correctamente");
         return '<!-- Google Maps: API Key no configurada -->';
     }

@@ -7,7 +7,7 @@ exit;
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Gestión de Usuarios</h2>
-        <a href="registrar_usuario.php" class="btn btn-success">
+        <a href="/presentacion/pRegistro.php" class="btn btn-success">
             <i class="fas fa-user-plus"></i> Nuevo Usuario
         </a>
     </div>

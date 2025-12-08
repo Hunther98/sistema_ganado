@@ -1,0 +1,4 @@
+{
+    "phpserver.phpConfigPath": "index.php",
+    "python.analysis.aiHoverSummaries": true
+}

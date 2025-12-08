@@ -45,7 +45,7 @@ $titulo = 'Mis Compras';
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <img src="../uploads/<?php echo $compra['ganado_imagen']; ?>" alt="<?php echo $compra['ganado_nombre']; ?>" class="img-thumbnail me-2" style="width: 50px; height: 50px; object-fit: cover;">
+                                            <img src="uploads/<?php echo $compra['ganado_imagen']; ?>" alt="<?php echo $compra['ganado_nombre']; ?>" class="img-thumbnail me-2" style="width: 50px; height: 50px; object-fit: cover;">
                                             <div><?php echo $compra['ganado_nombre']; ?></div>
                                         </div>
                                     </td>

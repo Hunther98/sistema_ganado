@@ -80,8 +80,23 @@ class nVenta {
         return $venta->obtenerVentasPendientesPorUsuario($usuario_id);
     }
     public function obtenerTodasLasVentas() {
-        $dVenta = new dVenta();
-        return $dVenta->obtenerTodas();
+        $dVenta = new dVenta();  
+        $dVenta->obtenerTodas();
+        $ventas = $dVenta->obtenerTodas();
+        $resultado = [];
+
+        if (!empty($ventas) && is_array($ventas)) {
+            foreach ($ventas as $venta) {
+            if (isset($venta['id']) && intval($venta['id']) > 0) {
+                $detalle = $this->obtenerVentaPorId(intval($venta['id']));
+                if ($detalle) {
+                $resultado[] = $detalle;
+                }
+            }
+            }
+        }
+
+        return $resultado;
     }
 }
 ?>

@@ -1,0 +1,151 @@
+<mxfile host="Electron" modified="2025-11-23T12:00:00.000Z" agent="Mozilla/5.0" etag="hash" version="24.0.0" type="device">
+  <diagram name="Casos de Uso General del Sistema" id="general-use-case">
+    <mxGraphModel dx="1200" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1400" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        
+        <!-- Actores -->
+        <mxCell id="actor-vendedor" value="Vendedor" style="shape=umlActor;outlineConnect=0;fillColor=#E8F5E9;strokeColor=#4CAF50;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="50" y="300" width="50" height="120" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="actor-comprador" value="Comprador" style="shape=umlActor;outlineConnect=0;fillColor=#E3F2FD;strokeColor=#2196F3;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="50" y="600" width="50" height="120" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="actor-admin" value="Administrador" style="shape=umlActor;outlineConnect=0;fillColor=#FCE4EC;strokeColor=#E91E63;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="450" width="50" height="120" as="geometry"/>
+        </mxCell>
+        
+        <!-- Sistema Principal -->
+        <mxCell id="sistema" value="SISTEMA DE VENTA DE GANADO" style="shape=ellipse;aspect=fixed;fillColor=#FFFACD;strokeColor=#FFA500;strokeWidth=4;" vertex="1" parent="1">
+          <mxGeometry x="200" y="150" width="800" height="900" as="geometry"/>
+        </mxCell>
+        
+        <!-- Autenticación -->
+        <mxCell id="uc-registrar" value="Registrar Usuario" style="ellipse;whiteSpace:wrap;html=1;fillColor=#FFF9C4;strokeColor=#FBC02D;" vertex="1" parent="1">
+          <mxGeometry x="280" y="180" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-login" value="Iniciar Sesión" style="ellipse;whiteSpace:wrap;html=1;fillColor=#FFF9C4;strokeColor=#FBC02D;" vertex="1" parent="1">
+          <mxGeometry x="420" y="180" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-logout" value="Cerrar Sesión" style="ellipse;whiteSpace:wrap;html=1;fillColor:#FFF9C4;strokeColor:#FBC02D;" vertex="1" parent="1">
+          <mxGeometry x="560" y="180" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <!-- Gestión de Ganado (Vendedor) -->
+        <mxCell id="uc-pub-ganado" value="Publicar Ganado" style="ellipse;whiteSpace:wrap;html=1;fillColor=#E8F5E9;strokeColor=#4CAF50;" vertex="1" parent="1">
+          <mxGeometry x="280" y="300" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-edit-ganado" value="Editar Ganado" style="ellipse;whiteSpace:wrap;html=1;fillColor=#E8F5E9;strokeColor=#4CAF50;" vertex="1" parent="1">
+          <mxGeometry x="420" y="300" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-del-ganado" value="Eliminar Ganado" style="ellipse;whiteSpace:wrap;html=1;fillColor=#E8F5E9;strokeColor=#4CAF50;" vertex="1" parent="1">
+          <mxGeometry x="560" y="300" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <!-- Gestión de Vacunaciones -->
+        <mxCell id="uc-vacunas" value="Registrar Vacunaciones" style="ellipse;whiteSpace:wrap;html=1;fillColor=#E8F5E9;strokeColor=#4CAF50;" vertex="1" parent="1">
+          <mxGeometry x="700" y="300" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <!-- Búsqueda y Catálogo (Comprador) -->
+        <mxCell id="uc-catalogo" value="Explorar Catálogo" style="ellipse;whiteSpace:wrap;html=1;fillColor:#E3F2FD;strokeColor:#2196F3;" vertex="1" parent="1">
+          <mxGeometry x="280" y="450" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-buscar" value="Buscar Ganado" style="ellipse;whiteSpace:wrap;html=1;fillColor:#E3F2FD;strokeColor:#2196F3;" vertex="1" parent="1">
+          <mxGeometry x="420" y="450" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-detalle" value="Ver Detalles" style="ellipse;whiteSpace:wrap;html=1;fillColor:#E3F2FD;strokeColor:#2196F3;" vertex="1" parent="1">
+          <mxGeometry x="560" y="450" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-ubicacion" value="Ver Ubicación en Mapa" style="ellipse;whiteSpace:wrap;html=1;fillColor:#E3F2FD;strokeColor:#2196F3;" vertex="1" parent="1">
+          <mxGeometry x="700" y="450" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <!-- Compras y Ventas -->
+        <mxCell id="uc-compra" value="Realizar Compra" style="ellipse;whiteSpace:wrap;html=1;fillColor:#E3F2FD;strokeColor:#2196F3;" vertex="1" parent="1">
+          <mxGeometry x="280" y="600" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-mis-compras" value="Ver Mis Compras" style="ellipse;whiteSpace:wrap;html=1;fillColor:#E3F2FD;strokeColor:#2196F3;" vertex="1" parent="1">
+          <mxGeometry x="420" y="600" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-mis-ventas" value="Ver Mis Ventas" style="ellipse;whiteSpace:wrap;html=1;fillColor:#E8F5E9;strokeColor:#4CAF50;" vertex="1" parent="1">
+          <mxGeometry x="560" y="600" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-confirmar-venta" value="Confirmar/Cancelar Venta" style="ellipse;whiteSpace:wrap;html=1;fillColor:#E8F5E9;strokeColor:#4CAF50;" vertex="1" parent="1">
+          <mxGeometry x="700" y="600" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <!-- Gestión de Perfil -->
+        <mxCell id="uc-perfil" value="Ver/Editar Perfil" style="ellipse;whiteSpace:wrap;html=1;fillColor:#F3E5F5;strokeColor:#9C27B0;" vertex="1" parent="1">
+          <mxGeometry x="280" y="750" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-cambiar-pass" value="Cambiar Contraseña" style="ellipse;whiteSpace:wrap;html=1;fillColor:#F3E5F5;strokeColor=#9C27B0;" vertex="1" parent="1">
+          <mxGeometry x="420" y="750" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-eliminar-cuenta" value="Eliminar Cuenta" style="ellipse;whiteSpace:wrap;html=1;fillColor:#F3E5F5;strokeColor=#9C27B0;" vertex="1" parent="1">
+          <mxGeometry x="560" y="750" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <!-- Reportes y Análisis -->
+        <mxCell id="uc-estadisticas" value="Ver Estadísticas" style="ellipse;whiteSpace:wrap;html=1;fillColor:#FCE4EC;strokeColor:#E91E63;" vertex="1" parent="1">
+          <mxGeometry x="280" y="900" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-reportes" value="Descargar Reportes" style="ellipse;whiteSpace:wrap;html=1;fillColor=#FCE4EC;strokeColor#E91E63;" vertex="1" parent="1">
+          <mxGeometry x="420" y="900" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-usuarios" value="Gestionar Usuarios" style="ellipse;whiteSpace:wrap;html=1;fillColor:#FCE4EC;strokeColor:#E91E63;" vertex="1" parent="1">
+          <mxGeometry x="560" y="900" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="uc-admin" value="Administrar Sistema" style="ellipse;whiteSpace:wrap;html=1;fillColor:#FCE4EC;strokeColor#E91E63;" vertex="1" parent="1">
+          <mxGeometry x="700" y="900" width="120" height="50" as="geometry"/>
+        </mxCell>
+        
+        <!-- Asociaciones Vendedor -->
+        <mxCell id="line1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#4CAF50;strokeWidth=2;" edge="1" parent="1" source="actor-vendedor" target="uc-pub-ganado">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="line2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#4CAF50;strokeWidth=2;" edge="1" parent="1" source="actor-vendedor" target="uc-mis-ventas">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Asociaciones Comprador -->
+        <mxCell id="line3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor:#2196F3;strokeWidth=2;" edge="1" parent="1" source="actor-comprador" target="uc-catalogo">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="line4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor:#2196F3;strokeWidth=2;" edge="1" parent="1" source="actor-comprador" target="uc-compra">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <!-- Asociaciones Admin -->
+        <mxCell id="line5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor:#E91E63;strokeWidth=2;" edge="1" parent="1" source="actor-admin" target="uc-usuarios">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+        <mxCell id="line6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor:#E91E63;strokeWidth=2;" edge="1" parent="1" source="actor-admin" target="uc-admin">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

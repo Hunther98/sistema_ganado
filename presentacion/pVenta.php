@@ -59,7 +59,7 @@ $titulo = 'Procesar Compra';
                     
                     <div class="row mb-4">
                         <div class="col-md-5">
-                            <img src="../uploads/<?php echo $ganado['imagen']; ?>" alt="<?php echo $ganado['nombre']; ?>" class="img-fluid rounded">
+                            <img src="uploads/<?php echo $ganado['imagen']; ?>" alt="<?php echo $ganado['nombre']; ?>" class="img-fluid rounded">
                         </div>
                         <div class="col-md-7">
                             <h4><?php echo $ganado['nombre']; ?></h4>

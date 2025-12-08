@@ -82,7 +82,7 @@ class MYPDF extends TCPDF {
         $incluir = true;
         
         // Aplicar cada filtro
-        if (!empty($filtros['id']) && stripos($row['idUsuario'], $filtros['id']) === false) {
+        if (!empty($filtros['id']) && stripos($row['id'], $filtros['id']) === false) {
             $incluir = false;
         }
         if (!empty($filtros['nombre']) && stripos($row['nombre'], $filtros['nombre']) === false) {

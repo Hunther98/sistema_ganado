@@ -2,8 +2,8 @@
 // Configuración de la aplicación
 define('APP_NAME', 'Sistema de Venta de Ganado');
 define('APP_VERSION', '1.0.0');
-// Ajusta el APP_URL según tu entorno (XAMPP normalmente usa http://localhost/<carpeta>)
-define('APP_URL', 'http://localhost:8080//sistema_ganado_septiembre');
+// Ajusta el APP_URL según entorno (XAMPP normalmente usa http://localhost/<carpeta>)
+define('APP_URL', 'http://localhost//sistema_ganado_septiembre');
 
 // Configuración de la base de datos
 define('DB_HOST', 'localhost');
@@ -21,26 +21,6 @@ define('ALLOWED_IMAGE_TYPES', ['jpg', 'jpeg', 'png', 'gif']);
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-// Cerrar sesión si está vacía
-if (empty($_SESSION)) {
-    session_destroy();
-}
-if (!empty($_SESSION)) {
-    // Regenerar ID de sesión para mayor seguridad
-    session_regenerate_id(true);
-}
-if (isset($_SESSION['ultimo_acceso'])) {
-    $inactividad = 1800; // 30 minutos
-    if (time() - $_SESSION['ultimo_acceso'] > $inactividad) {
-        // Tiempo de inactividad excedido, destruir sesión
-        session_unset();
-        session_destroy();
-    }
-}
-if (isset($_SESSION['usuario_id'])) {
-    $_SESSION['ultimo_acceso'] = time(); // Actualizar tiempo de último acceso
-}
-
 // Función para verificar autenticación
 function verificarAutenticacion($tipoRequerido = null) {
     if (!isset($_SESSION['usuario_id'])) {
@@ -79,7 +59,7 @@ define('EMAIL_FROM_ADDRESS', 'noreply@sistemaganado.com');
 
 
 // Configuración de APIs externas (placeholder)
-define('GOOGLE_MAPS_API_KEY', 'TU_API_KEY_AQUI');
+define('GOOGLE_MAPS_API_KEY', 'AIzaSyDiHCfCjzf-C8A8ZaYPknAQEoJ_WYTxhhk');
 define('GOOGLE_MAPS_ENABLED', true);
 
 // Flags de servicios

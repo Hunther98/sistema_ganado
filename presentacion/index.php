@@ -1,9 +1,4 @@
 <?php
-/**
- * Página de Inicio - Sistema de Venta de Ganado
- * Landing page profesional con información general
- */
-
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../config/seguridad.php';
 require_once __DIR__ . '/../config/redirecciones.php';
@@ -100,7 +95,7 @@ $estadisticas = obtenerEstadisticasGenerales();
                 <div class="position-relative slide-in">
                     <div class="bg-gradient rounded-lg overflow-hidden shadow-lg" style="height: 400px; display: flex; align-items: center; justify-content: center;">
                         <div class="text-center">
-                            <i class="fas fa-cow display-1 text-primary opacity-75" style="font-size: 10rem;"></i>
+                            <i class=" fa-cow display-1 text-primary opacity-75" style="font-size: 10rem;"></i>
                             <p class="text-muted mt-3">Ganado de calidad para tu negocio</p>
                         </div>
                     </div>
